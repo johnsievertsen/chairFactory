@@ -59,6 +59,17 @@ function produce(e) {
     switch (e.target.className) {
         case 'wood-produce':
             woodProdButton.disabled = true;
+            // let x = setInterval(function () {
+            //     let d = new Date();
+            //     let startTime = d.getSeconds();
+            //     let endTime = startTime + prodStats.woodTime;
+            //     let timer = startTime - endTime;
+            //     let seconds = Math.floor((timer % (1000 * 60)) / 1000);
+            //     woodTimer.innerHTML = seconds;
+            //     if (timer < 0) {
+            //         woodTimer.innerHTML = `${prodStats.woodTime}s`;
+            //     }
+            // }, 1000);
             setTimeout(() => {
                 prodStats.woodAmount++;
                 totalChairs++;
@@ -215,10 +226,11 @@ function upgrade(e) {
 
 function renameFactory() {
     if (!renameValue.value) {
-        renameValue.value = 'ERROR: Please enter a name';
+        renameValue.placeholder = 'ERROR: Please enter a name';
         return;
     }
     factoryName.innerHTML = renameValue.value;
+    renameValue.placeholder = '';
 }
 
 function unlock(e) {
