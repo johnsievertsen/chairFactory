@@ -52,13 +52,13 @@
 .cloth-produce {
     position: fixed;
     left: 1%;
-    top: 24.7%;
+    top: 24.3%;
 }
 
 .cloth {
     position: fixed;
     left: 5%;
-    top: 25%;
+    top: 24.5%;
     opacity: 0.5;
 }
 
@@ -84,5 +84,5 @@
 .cloth-prod-timer {
     position: fixed;
     left: 15%;
-    top: 25%;
+    top: 24.3%;
 }
