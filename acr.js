@@ -59,17 +59,6 @@ function produce(e) {
     switch (e.target.className) {
         case 'wood-produce':
             woodProdButton.disabled = true;
-            // let x = setInterval(function () {
-            //     let d = new Date();
-            //     let startTime = d.getSeconds();
-            //     let endTime = startTime + prodStats.woodTime;
-            //     let timer = startTime - endTime;
-            //     let seconds = Math.floor((timer % (1000 * 60)) / 1000);
-            //     woodTimer.innerHTML = seconds;
-            //     if (timer < 0) {
-            //         woodTimer.innerHTML = `${prodStats.woodTime}s`;
-            //     }
-            // }, 1000);
             setTimeout(() => {
                 prodStats.woodAmount++;
                 totalChairs++;
@@ -156,7 +145,8 @@ function upgrade(e) {
                 woodProdTime.innerHTML = `Reduce Time: $${prodStats.woodSpeedUpgradeCost}`;
                 break;
             } else {
-                console.log('not enough money');
+                renameValue.placeholder = 'NOT ENOUGH MONEY';
+                setTimeout(function () { renameValue.placeholder = '' }, 3000);
                 break;
             }
         case 'wood-automate':
@@ -168,7 +158,8 @@ function upgrade(e) {
                 woodAutoInterval = setInterval(woodAutomate, prodStats.woodTime * 1000);
                 break;
             } else {
-                console.log('not enough money');
+                renameValue.placeholder = 'NOT ENOUGH MONEY';
+                setTimeout(function () { renameValue.placeholder = '' }, 3000);
                 break;
             }
         case 'cloth-prod-time':
@@ -181,7 +172,8 @@ function upgrade(e) {
                 clothProdTime.innerHTML = `Reduce Time: $${prodStats.clothSpeedUpgradeCost}`;
                 break;
             } else {
-                console.log('not enough money');
+                renameValue.placeholder = 'NOT ENOUGH MONEY';
+                setTimeout(function () { renameValue.placeholder = '' }, 3000);
                 break;
             }
         case 'cloth-automate':
@@ -193,7 +185,8 @@ function upgrade(e) {
                 clothAutoInterval = setInterval(clothAutomate, prodStats.clothTime * 1000);
                 break;
             } else {
-                console.log('not enough money');
+                renameValue.placeholder = 'NOT ENOUGH MONEY';
+                setTimeout(function () { renameValue.placeholder = '' }, 3000);
                 break;
             }
         case 'office-prod-time':
@@ -206,7 +199,8 @@ function upgrade(e) {
                 officeProdTime.innerHTML = `Reduce Time: $${prodStats.officeSpeedUpgradeCost}`;
                 break;
             } else {
-                console.log('not enough money');
+                renameValue.placeholder = 'NOT ENOUGH MONEY';
+                setTimeout(function () { renameValue.placeholder = '' }, 3000);
                 break;
             }
         case 'office-automate':
@@ -218,7 +212,8 @@ function upgrade(e) {
                 officeAutoInterval = setInterval(officeAutomate, prodStats.officeTime * 1000);
                 break;
             } else {
-                console.log('not enough money');
+                renameValue.placeholder = 'NOT ENOUGH MONEY';
+                setTimeout(function () { renameValue.placeholder = '' }, 3000);
                 break;
             }
     }
@@ -246,7 +241,8 @@ function unlock(e) {
                 clothUnlock.style.display = 'none';
                 break;
             } else {
-                console.log('not enough money');
+                renameValue.placeholder = 'NOT ENOUGH MONEY';
+                setTimeout(function () { renameValue.placeholder = '' }, 3000);
                 break;
             }
         case 'office-prod-timer office-unlock':
@@ -260,7 +256,8 @@ function unlock(e) {
                 officeUnlock.style.display = 'none';
                 break;
             } else {
-                console.log('not enough money');
+                renameValue.placeholder = 'NOT ENOUGH MONEY';
+                setTimeout(function () { renameValue.placeholder = '' }, 3000);
                 break;
             }
     }
