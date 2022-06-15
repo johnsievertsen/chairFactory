@@ -89,7 +89,7 @@ function produce(e) {
                 totalDollars += prodStats.officeValue;
                 money.innerHTML = `You have: ${totalDollars} dollars`;
                 chairs.innerHTML = `You have produced: ${totalChairs} chairs`;
-                officeAmt.innerHTML = `Office Chair: ${prodStats.officeAmount} ($28)`;
+                officeAmt.innerHTML = `Office Chair: ${prodStats.officeAmount} ($45)`;
                 officeProdButton.disabled = false;
             }, (prodStats.officeTime) * 1000);
             break;
@@ -149,6 +149,10 @@ function upgrade(e) {
                 setTimeout(function () { renameValue.placeholder = '' }, 3000);
                 break;
             }
+            if (prodStats.woodTime <= 0.1) {
+                prodStats.woodTime = 0.1;
+                woodProdTime.disabled = true;
+            }
         case 'wood-automate':
             if (totalDollars >= prodStats.woodAutoUpgradeCost) {
                 totalDollars -= prodStats.woodAutoUpgradeCost;
@@ -175,6 +179,10 @@ function upgrade(e) {
                 renameValue.placeholder = 'NOT ENOUGH MONEY';
                 setTimeout(function () { renameValue.placeholder = '' }, 3000);
                 break;
+            }
+            if (prodStats.clothTime <= 0.1) {
+                prodStats.clothTime = 0.1;
+                clothProdTime.disabled = true;
             }
         case 'cloth-automate':
             if (totalDollars >= prodStats.clothAutoUpgradeCost) {
@@ -203,12 +211,17 @@ function upgrade(e) {
                 setTimeout(function () { renameValue.placeholder = '' }, 3000);
                 break;
             }
+            if (prodStats.officeTime <= 0.1) {
+                prodStats.officeTime = 0.1;
+                officeProdTime.disabled = true;
+            }
         case 'office-automate':
             if (totalDollars >= prodStats.officeAutoUpgradeCost) {
                 totalDollars -= prodStats.officeAutoUpgradeCost;
                 money.innerHTML = `You have: ${totalDollars} dollars`;
                 officeAuto.disabled = true;
                 officeProdButton.disabled = true;
+                console.log(officeProdButton.disabled);
                 officeAutoInterval = setInterval(officeAutomate, prodStats.officeTime * 1000);
                 break;
             } else {
