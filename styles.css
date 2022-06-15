@@ -1,0 +1,87 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+    /* border: 1px solid red; */
+}
+
+.factory-name {
+    font-size: 30px;
+    padding: 20px;
+}
+
+.money {
+    top: 25px;
+    position: fixed;
+    left: 40%;
+    padding: 10px;
+}
+
+.chairs {
+    top: 25px;
+    padding: 10px;
+    position: fixed;
+    left: 80%;
+}
+
+.name {
+    position: fixed;
+    left: 90px;
+}
+
+.rename {
+    position: fixed;
+    left: 20px;
+}
+
+.factory {
+    position: relative;
+    top: 100px;
+}
+
+.wood-produce {
+    position: fixed;
+    left: 1%;
+    top: 18.2%
+}
+
+.wood {
+    left: 95px;
+    position: fixed;
+    top: 18.5%;
+}
+
+.cloth-produce {
+    position: fixed;
+    left: 1%;
+    top: 24.7%;
+}
+
+.cloth {
+    position: fixed;
+    left: 5%;
+    top: 25%;
+}
+
+.upgrades {
+    position: relative;
+    left: 20%;
+    width: 10%;
+    margin-top: 1px;
+}
+
+.upgrade-label {
+    left: 20%;
+    position: fixed;
+    top: 15%;
+}
+
+.wood-prod-timer {
+    position: fixed;
+    left: 15%;
+    top: 18.5%;
+}
+
+.cloth-prod-timer {
+    position: fixed;
+    left: 15%;
+    top: 25%;
+}
