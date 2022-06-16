@@ -96,32 +96,33 @@ html {
 
 .upgrades {
     position: relative;
-    left: 21%;
+    top: 7px;
+    left: 41%;
     width: 15%;
     margin-top: 1px;
 }
 
 .upgrade-label {
-    left: 21%;
+    left: 41%;
     position: fixed;
     top: 9.25%;
 }
 
 .wood-prod-timer {
     position: fixed;
-    left: 15%;
+    left: 25%;
     top: 13.5%;
 }
 
 .cloth-prod-timer {
     position: fixed;
-    left: 15%;
+    left: 25%;
     top: 19.3%;
 }
 
 .office-prod-timer {
     position: fixed;
-    left: 15%;
+    left: 25%;
     top: 26%;
 }
 
