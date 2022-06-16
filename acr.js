@@ -20,6 +20,12 @@ const officeProdTime = document.querySelector('.office-prod-time');
 const officeAuto = document.querySelector('.office-automate');
 const officeTimer = document.querySelector('.office-prod-timer');
 const officeUnlock = document.querySelector('.office-unlock');
+const leatherProdButton = document.querySelector('.leather-produce');
+const leatherAmt = document.querySelector('.leather');
+const leatherProdTime = document.querySelector('.leather-prod-time');
+const leatherAuto = document.querySelector('.leather-automate');
+const leatherTimer = document.querySelector('.leather-prod-timer');
+const leatherUnlock = document.querySelector('.leather-unlock');
 let totalDollars = 0;
 let totalChairs = 0;
 
@@ -30,6 +36,9 @@ function init() {
     officeProdButton.disabled = true;
     officeAuto.disabled = true;
     officeProdTime.disabled = true;
+    leatherProdButton.disabled = true;
+    leatherAuto.disabled = true;
+    leatherProdTime.disabled = true;
 }
 init();
 
@@ -51,6 +60,12 @@ const prodStats = {
     officeSpeedUpgradeCost: 742,
     officeAutoUpgradeCost: 9375,
     officeUnlock: 1625,
+    leatherTime: 180,
+    leatherValue: 386,
+    leatherAmount: 0,
+    leatherSpeedUpgradeCost: 1502,
+    leatherAutoUpgradeCost: 17832,
+    leatherUnlock: 8309,
 }
 
 function produce(e) {
@@ -91,12 +106,25 @@ function produce(e) {
                 officeProdButton.disabled = false;
             }, (prodStats.officeTime) * 1000);
             break;
+        case 'leather-produce':
+            leatherProdButton.disabled = true;
+            setTimeout(() => {
+                prodStats.leatherAmount++;
+                totalChairs++;
+                totalDollars += prodStats.leatherValue;
+                money.innerHTML = `You have: $${totalDollars.toPrecision(5)}`;
+                chairs.innerHTML = `You have produced: ${totalChairs} chairs`;
+                leatherAmt.innerHTML = `Leather Chair: ${prodStats.leatherAmount} ($386)`;
+                leatherProdButton.disabled = false;
+            }, (prodStats.leatherTime) * 1000);
+            break;
     }
 }
 
 let woodAutoInterval = null;
 let clothAutoInterval = null;
 let officeAutoInterval = null;
+let leatherAutoInterval = null;
 
 function woodAutomate() {
     clearInterval(woodAutoInterval);
@@ -129,6 +157,17 @@ function officeAutomate() {
     chairs.innerHTML = `You have produced: ${totalChairs} chairs`;
     officeAmt.innerHTML = `Office Chair: ${prodStats.officeAmount} ($${prodStats.officeValue})`;
     officeAutoInterval = setInterval(officeAutomate, prodStats.officeTime * 1000);
+}
+
+function leatherAutomate() {
+    clearInterval(leatherAutoInterval);
+    prodStats.leatherAmount++;
+    totalChairs++;
+    totalDollars += prodStats.leatherValue;
+    money.innerHTML = `You have: $${totalDollars.toPrecision(5)}`;
+    chairs.innerHTML = `You have produced: ${totalChairs} chairs`;
+    leatherAmt.innerHTML = `Leather Chair: ${prodStats.leatherAmount} ($${prodStats.leatherValue})`;
+    leatherAutoInterval = setInterval(leatherAutomate, prodStats.leatherTime * 1000);
 }
 
 function upgrade(e) {
@@ -170,7 +209,7 @@ function upgrade(e) {
             if (totalDollars >= prodStats.clothSpeedUpgradeCost) {
                 totalDollars = (totalDollars - parseInt(prodStats.clothSpeedUpgradeCost).toPrecision(5));
                 money.innerHTML = `You have: $${totalDollars.toPrecision(5)}`;
-                prodStats.clothTime /= 1.2;
+                prodStats.clothTime /= 1.28;
                 clothTimer.innerHTML = `${prodStats.clothTime.toPrecision(4)}s`;
                 prodStats.clothSpeedUpgradeCost = parseInt((prodStats.clothSpeedUpgradeCost * 1.4).toPrecision(7));
                 clothProdTime.innerHTML = `Reduce Time: $${prodStats.clothSpeedUpgradeCost}`;
@@ -203,7 +242,7 @@ function upgrade(e) {
             if (totalDollars >= prodStats.officeSpeedUpgradeCost) {
                 totalDollars = (totalDollars - parseInt(prodStats.officeSpeedUpgradeCost.toPrecision(5)));
                 money.innerHTML = `You have: $${totalDollars.toPrecision(5)}`;
-                prodStats.officeTime /= 1.15;
+                prodStats.officeTime /= 1.3;
                 officeTimer.innerHTML = `${prodStats.officeTime.toPrecision(4)}s`;
                 prodStats.officeSpeedUpgradeCost = parseInt((prodStats.officeSpeedUpgradeCost * 1.5).toPrecision(9));
                 officeProdTime.innerHTML = `Reduce Time: $${prodStats.officeSpeedUpgradeCost}`;
@@ -226,6 +265,39 @@ function upgrade(e) {
                 officeAuto.disabled = true;
                 officeProdButton.disabled = true;
                 officeAutoInterval = setInterval(officeAutomate, prodStats.officeTime * 1000);
+                break;
+            } else {
+                renameValue.placeholder = 'NOT ENOUGH MONEY';
+                setTimeout(function () { renameValue.placeholder = '' }, 3000);
+                break;
+            }
+        case 'leather-prod-time':
+            if (totalDollars >= prodStats.leatherSpeedUpgradeCost) {
+                totalDollars = (totalDollars - parseInt(prodStats.leatherSpeedUpgradeCost.toPrecision(5)));
+                money.innerHTML = `You have: $${totalDollars.toPrecision(5)}`;
+                prodStats.leatherTime /= 1.35;
+                leatherTimer.innerHTML = `${prodStats.leatherTime.toPrecision(4)}s`;
+                prodStats.leatherSpeedUpgradeCost = parseInt((prodStats.leatherSpeedUpgradeCost * 1.5).toPrecision(12));
+                leatherProdTime.innerHTML = `Reduce Time: $${prodStats.leatherSpeedUpgradeCost}`;
+                if (prodStats.leatherTime <= 1) {
+                    prodStats.leatherTime = 1;
+                    leatherProdTime.disabled = true;
+                    leatherProdTime.innerHTML = 'Reduce Time: MAX';
+                    leatherTimer.innerHTML = '1s (MAX)';
+                }
+                break;
+            } else {
+                renameValue.placeholder = 'NOT ENOUGH MONEY';
+                setTimeout(function () { renameValue.placeholder = '' }, 3000);
+                break;
+            }
+        case 'leather-automate':
+            if (totalDollars >= prodStats.leatherAutoUpgradeCost) {
+                totalDollars -= prodStats.leatherAutoUpgradeCost;
+                money.innerHTML = `You have: $${totalDollars.toPrecision(5)}`;
+                leatherAuto.disabled = true;
+                leatherProdButton.disabled = true;
+                leatherAutoInterval = setInterval(leatherAutomate, prodStats.leatherTime * 1000);
                 break;
             } else {
                 renameValue.placeholder = 'NOT ENOUGH MONEY';
@@ -276,6 +348,21 @@ function unlock(e) {
                 setTimeout(function () { renameValue.placeholder = '' }, 3000);
                 break;
             }
+        case 'leather-prod-timer leather-unlock':
+            if (totalDollars >= prodStats.leatherUnlock) {
+                totalDollars -= prodStats.leatherUnlock;
+                money.innerHTML = `You have: $${totalDollars.toPrecision(5)}`;
+                leatherProdButton.disabled = false;
+                leatherAuto.disabled = false;
+                leatherProdTime.disabled = false;
+                leatherAmt.style.opacity = 1;
+                leatherUnlock.style.display = 'none';
+                break;
+            } else {
+                renameValue.placeholder = 'NOT ENOUGH MONEY';
+                setTimeout(function () { renameValue.placeholder = '' }, 3000);
+                break;
+            }
     }
 }
 
@@ -291,3 +378,7 @@ officeProdTime.addEventListener('click', upgrade);
 officeAuto.addEventListener('click', upgrade);
 officeProdButton.addEventListener('click', produce);
 officeUnlock.addEventListener('click', unlock);
+leatherProdTime.addEventListener('click', upgrade);
+leatherAuto.addEventListener('click', upgrade);
+leatherProdButton.addEventListener('click', produce);
+leatherUnlock.addEventListener('click', unlock);
