@@ -35,10 +35,10 @@ init();
 
 const prodStats = {
     woodTime: 3.25,
-    woodValue: 13.5,
+    woodValue: 4.5,
     woodAmount: 0,
     woodSpeedUpgradeCost: 50,
-    woodAutoUpgradeCost: 1200,
+    woodAutoUpgradeCost: 1800,
     clothTime: 10,
     clothValue: 24.9,
     clothAmount: 0,
@@ -46,7 +46,7 @@ const prodStats = {
     clothAutoUpgradeCost: 5500,
     clothUnlock: 140,
     officeTime: 60,
-    officeValue: 48.7,
+    officeValue: 108.7,
     officeAmount: 0,
     officeSpeedUpgradeCost: 742,
     officeAutoUpgradeCost: 9375,
@@ -63,7 +63,7 @@ function produce(e) {
                 totalDollars += prodStats.woodValue;
                 money.innerHTML = `You have: $${totalDollars.toPrecision(5)}`;
                 chairs.innerHTML = `You have produced: ${totalChairs} chairs`;
-                woodAmt.innerHTML = `Wooden Chair: ${prodStats.woodAmount} ($13.50)`;
+                woodAmt.innerHTML = `Wooden Chair: ${prodStats.woodAmount} ($4.50)`;
                 woodProdButton.disabled = false;
             }, (prodStats.woodTime) * 1000);
             break;
@@ -87,7 +87,7 @@ function produce(e) {
                 totalDollars += prodStats.officeValue;
                 money.innerHTML = `You have: $${totalDollars.toPrecision(5)}`;
                 chairs.innerHTML = `You have produced: ${totalChairs} chairs`;
-                officeAmt.innerHTML = `Office Chair: ${prodStats.officeAmount} ($48.70)`;
+                officeAmt.innerHTML = `Office Chair: ${prodStats.officeAmount} ($108.70)`;
                 officeProdButton.disabled = false;
             }, (prodStats.officeTime) * 1000);
             break;
@@ -103,7 +103,7 @@ function woodAutomate() {
     prodStats.woodAmount++;
     totalChairs++;
     totalDollars += prodStats.woodValue;
-    money.innerHTML = `You have: ${totalDollars} dollars`;
+    money.innerHTML = `You have: $${totalDollars.toPrecision(5)}`;
     chairs.innerHTML = `You have produced: ${totalChairs} chairs`;
     woodAmt.innerHTML = `Wooden Chair: ${prodStats.woodAmount} ($${prodStats.woodValue})`;
     woodAutoInterval = setInterval(woodAutomate, prodStats.woodTime * 1000);
@@ -114,7 +114,7 @@ function clothAutomate() {
     prodStats.clothAmount++;
     totalChairs++;
     totalDollars += prodStats.clothValue;
-    money.innerHTML = `You have: ${totalDollars} dollars`;
+    money.innerHTML = `You have: $${totalDollars.toPrecision(5)}`;
     chairs.innerHTML = `You have produced: ${totalChairs} chairs`;
     clothAmt.innerHTML = `Cloth Chair: ${prodStats.clothAmount} ($${prodStats.clothValue})`;
     clothAutoInterval = setInterval(clothAutomate, prodStats.clothTime * 1000);
@@ -125,7 +125,7 @@ function officeAutomate() {
     prodStats.officeAmount++;
     totalChairs++;
     totalDollars += prodStats.officeValue;
-    money.innerHTML = `You have: ${totalDollars} dollars`;
+    money.innerHTML = `You have: $${totalDollars.toPrecision(5)}`;
     chairs.innerHTML = `You have produced: ${totalChairs} chairs`;
     officeAmt.innerHTML = `Office Chair: ${prodStats.officeAmount} ($${prodStats.officeValue})`;
     officeAutoInterval = setInterval(officeAutomate, prodStats.officeTime * 1000);
