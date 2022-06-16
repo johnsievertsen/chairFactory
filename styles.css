@@ -56,32 +56,32 @@ html {
 .wood-produce {
     position: fixed;
     left: 1%;
-    top: 13.2%;
+    top: 14.2%;
 }
 
 .wood {
     left: 5%;
     position: fixed;
-    top: 13.5%;
+    top: 14.5%;
     color: white;
 }
 
 .cloth-produce {
     position: fixed;
     left: 1%;
-    top: 19.3%;
+    top: 20.3%;
 }
 
 .office-produce {
     position: fixed;
     left: 1%;
-    top: 25.8%;
+    top: 26.8%;
 }
 
 .cloth {
     position: fixed;
     left: 5%;
-    top: 19.5%;
+    top: 20.5%;
     opacity: 0.5;
     color: white;
 }
@@ -89,7 +89,7 @@ html {
 .office {
     position: fixed;
     left: 5%;
-    top: 26%;
+    top: 27%;
     opacity: 0.5;
     color: white;
 }
@@ -111,19 +111,19 @@ html {
 .wood-prod-timer {
     position: fixed;
     left: 25%;
-    top: 13.5%;
+    top: 14.5%;
 }
 
 .cloth-prod-timer {
     position: fixed;
     left: 25%;
-    top: 19.3%;
+    top: 20.3%;
 }
 
 .office-prod-timer {
     position: fixed;
     left: 25%;
-    top: 26%;
+    top: 27%;
 }
 
 .cloth-unlock,
