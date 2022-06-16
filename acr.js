@@ -40,7 +40,7 @@ const prodStats = {
     woodSpeedUpgradeCost: 50,
     woodAutoUpgradeCost: 1200,
     clothTime: 10,
-    clothValue: 24.99,
+    clothValue: 24.9,
     clothAmount: 0,
     clothSpeedUpgradeCost: 250,
     clothAutoUpgradeCost: 5500,
@@ -61,7 +61,7 @@ function produce(e) {
                 prodStats.woodAmount++;
                 totalChairs++;
                 totalDollars += prodStats.woodValue;
-                money.innerHTML = `You have: $${totalDollars}`;
+                money.innerHTML = `You have: $${totalDollars.toPrecision(5)}`;
                 chairs.innerHTML = `You have produced: ${totalChairs} chairs`;
                 woodAmt.innerHTML = `Wooden Chair: ${prodStats.woodAmount} ($13.50)`;
                 woodProdButton.disabled = false;
@@ -73,9 +73,9 @@ function produce(e) {
                 prodStats.clothAmount++;
                 totalChairs++;
                 totalDollars += prodStats.clothValue;
-                money.innerHTML = `You have: $${totalDollars}`;
+                money.innerHTML = `You have: $${totalDollars.toPrecision(5)}`;
                 chairs.innerHTML = `You have produced: ${totalChairs} chairs`;
-                clothAmt.innerHTML = `Cloth Chair: ${prodStats.clothAmount} ($24.99)`;
+                clothAmt.innerHTML = `Cloth Chair: ${prodStats.clothAmount} ($24.90)`;
                 clothProdButton.disabled = false;
             }, (prodStats.clothTime) * 1000);
             break;
@@ -85,7 +85,7 @@ function produce(e) {
                 prodStats.officeAmount++;
                 totalChairs++;
                 totalDollars += prodStats.officeValue;
-                money.innerHTML = `You have: $${totalDollars}`;
+                money.innerHTML = `You have: $${totalDollars.toPrecision(5)}`;
                 chairs.innerHTML = `You have produced: ${totalChairs} chairs`;
                 officeAmt.innerHTML = `Office Chair: ${prodStats.officeAmount} ($48.70)`;
                 officeProdButton.disabled = false;
@@ -135,16 +135,18 @@ function upgrade(e) {
     switch (e.target.className) {
         case 'wood-prod-time':
             if (totalDollars >= prodStats.woodSpeedUpgradeCost) {
-                totalDollars = parseInt((totalDollars - prodStats.woodSpeedUpgradeCost).toPrecision(4));
-                money.innerHTML = `You have: $${totalDollars}`;
+                totalDollars = (totalDollars - parseInt(prodStats.woodSpeedUpgradeCost).toPrecision(5));
+                money.innerHTML = `You have: $${totalDollars.toPrecision(5)}`;
                 prodStats.woodTime /= 1.2;
-                if (prodStats.woodTime <= 0.05) {
-                    prodStats.woodTime = 0.05;
-                    woodProdTime.disabled = true;
-                }
                 woodTimer.innerHTML = `${prodStats.woodTime.toPrecision(4)}s`;
                 prodStats.woodSpeedUpgradeCost = parseInt((prodStats.woodSpeedUpgradeCost * 1.25).toPrecision(5));
                 woodProdTime.innerHTML = `Reduce Time: $${prodStats.woodSpeedUpgradeCost}`;
+                if (prodStats.woodTime <= 0.05) {
+                    prodStats.woodTime = 0.05;
+                    woodProdTime.disabled = true;
+                    woodProdTime.innerHTML = 'Reduce Time: MAX';
+                    woodTimer.innerHTML = '0.05s (MAX)';
+                }
                 break;
             } else {
                 renameValue.placeholder = 'NOT ENOUGH MONEY';
@@ -154,7 +156,7 @@ function upgrade(e) {
         case 'wood-automate':
             if (totalDollars >= prodStats.woodAutoUpgradeCost) {
                 totalDollars -= prodStats.woodAutoUpgradeCost;
-                money.innerHTML = `You have: $${totalDollars}`;
+                money.innerHTML = `You have: $${totalDollars.toPrecision(5)}`;
                 woodAuto.disabled = true;
                 woodProdButton.disabled = true;
                 woodAutoInterval = setInterval(woodAutomate, prodStats.woodTime * 1000);
@@ -166,16 +168,18 @@ function upgrade(e) {
             }
         case 'cloth-prod-time':
             if (totalDollars >= prodStats.clothSpeedUpgradeCost) {
-                totalDollars = parseInt((totalDollars - prodStats.clothSpeedUpgradeCost).toPrecision(4));
-                money.innerHTML = `You have: $${totalDollars}`;
+                totalDollars = (totalDollars - parseInt(prodStats.clothSpeedUpgradeCost).toPrecision(5));
+                money.innerHTML = `You have: $${totalDollars.toPrecision(5)}`;
                 prodStats.clothTime /= 1.2;
-                if (prodStats.clothTime <= 0.05) {
-                    prodStats.clothTime = 0.05;
-                    clothProdTime.disabled = true;
-                }
                 clothTimer.innerHTML = `${prodStats.clothTime.toPrecision(4)}s`;
-                prodStats.clothSpeedUpgradeCost = parseInt((prodStats.clothSpeedUpgradeCost * 1.4).toPrecision(5));
+                prodStats.clothSpeedUpgradeCost = parseInt((prodStats.clothSpeedUpgradeCost * 1.4).toPrecision(7));
                 clothProdTime.innerHTML = `Reduce Time: $${prodStats.clothSpeedUpgradeCost}`;
+                if (prodStats.clothTime <= 0.2) {
+                    prodStats.clothTime = 0.2;
+                    clothProdTime.disabled = true;
+                    clothProdTime.innerHTML = 'Reduce Time: MAX';
+                    clothTimer.innerHTML = '0.2s (MAX)';
+                }
                 break;
             } else {
                 renameValue.placeholder = 'NOT ENOUGH MONEY';
@@ -185,7 +189,7 @@ function upgrade(e) {
         case 'cloth-automate':
             if (totalDollars >= prodStats.clothAutoUpgradeCost) {
                 totalDollars -= prodStats.clothAutoUpgradeCost;
-                money.innerHTML = `You have: $${totalDollars}`;
+                money.innerHTML = `You have: $${totalDollars.toPrecision(5)}`;
                 clothAuto.disabled = true;
                 clothProdButton.disabled = true;
                 clothAutoInterval = setInterval(clothAutomate, prodStats.clothTime * 1000);
@@ -197,16 +201,18 @@ function upgrade(e) {
             }
         case 'office-prod-time':
             if (totalDollars >= prodStats.officeSpeedUpgradeCost) {
-                totalDollars = (totalDollars - parseInt(prodStats.officeSpeedUpgradeCost.toPrecision(4)));
-                money.innerHTML = `You have: $${totalDollars}`;
+                totalDollars = (totalDollars - parseInt(prodStats.officeSpeedUpgradeCost.toPrecision(5)));
+                money.innerHTML = `You have: $${totalDollars.toPrecision(5)}`;
                 prodStats.officeTime /= 1.15;
-                if (prodStats.officeTime <= 0.05) {
-                    prodStats.officeTime = 0.05;
-                    officeProdTime.disabled = true;
-                }
                 officeTimer.innerHTML = `${prodStats.officeTime.toPrecision(4)}s`;
-                prodStats.officeSpeedUpgradeCost = parseInt((prodStats.officeSpeedUpgradeCost * 1.5).toPrecision(5));
+                prodStats.officeSpeedUpgradeCost = parseInt((prodStats.officeSpeedUpgradeCost * 1.5).toPrecision(9));
                 officeProdTime.innerHTML = `Reduce Time: $${prodStats.officeSpeedUpgradeCost}`;
+                if (prodStats.officeTime <= 0.8) {
+                    prodStats.officeTime = 0.8;
+                    officeProdTime.disabled = true;
+                    officeProdTime.innerHTML = 'Reduce Time: MAX';
+                    officeTimer.innerHTML = '0.8s (MAX)';
+                }
                 break;
             } else {
                 renameValue.placeholder = 'NOT ENOUGH MONEY';
@@ -216,10 +222,9 @@ function upgrade(e) {
         case 'office-automate':
             if (totalDollars >= prodStats.officeAutoUpgradeCost) {
                 totalDollars -= prodStats.officeAutoUpgradeCost;
-                money.innerHTML = `You have: $${totalDollars}`;
+                money.innerHTML = `You have: $${totalDollars.toPrecision(5)}`;
                 officeAuto.disabled = true;
                 officeProdButton.disabled = true;
-                console.log(officeProdButton.disabled);
                 officeAutoInterval = setInterval(officeAutomate, prodStats.officeTime * 1000);
                 break;
             } else {
@@ -244,7 +249,7 @@ function unlock(e) {
         case 'cloth-prod-timer cloth-unlock':
             if (totalDollars >= prodStats.clothUnlock) {
                 totalDollars -= prodStats.clothUnlock;
-                money.innerHTML = `You have: $${totalDollars}`;
+                money.innerHTML = `You have: $${totalDollars.toPrecision(5)}`;
                 clothProdButton.disabled = false;
                 clothAuto.disabled = false;
                 clothProdTime.disabled = false;
@@ -259,7 +264,7 @@ function unlock(e) {
         case 'office-prod-timer office-unlock':
             if (totalDollars >= prodStats.officeUnlock) {
                 totalDollars -= prodStats.officeUnlock;
-                money.innerHTML = `You have: $${totalDollars}`;
+                money.innerHTML = `You have: $${totalDollars.toPrecision(5)}`;
                 officeProdButton.disabled = false;
                 officeAuto.disabled = false;
                 officeProdTime.disabled = false;
