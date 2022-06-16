@@ -131,19 +131,19 @@ html {
 .cloth-prod-timer {
     position: fixed;
     left: 25%;
-    top: 24.5%;
+    top: 24%;
 }
 
 .office-prod-timer {
     position: fixed;
     left: 25%;
-    top: 32.6%;
+    top: 32%;
 }
 
 .leather-prod-timer {
     position: fixed;
     left: 25%;
-    top: 41%;
+    top: 40.5%;
 }
 
 .cloth-unlock,
