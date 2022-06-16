@@ -93,7 +93,7 @@ function produce(e) {
                 totalDollars += (prodStats.woodValue * prodStats.woodMultiplier);
                 money.innerHTML = `You have: $${totalDollars.toPrecision(5)}`;
                 chairs.innerHTML = `You have produced: ${totalChairs} chairs`;
-                woodAmt.innerHTML = `Wooden Chair: ${prodStats.woodAmount} ($4.50)`;
+                woodAmt.innerHTML = `Wooden Chair: ${prodStats.woodAmount} ($${prodStats.woodValue} (x${prodStats.woodMultiplier}))`;
                 woodProdButton.disabled = false;
             }, (prodStats.woodTime) * 1000);
             break;
@@ -105,7 +105,7 @@ function produce(e) {
                 totalDollars += (prodStats.clothValue * prodStats.clothMultiplier);
                 money.innerHTML = `You have: $${totalDollars.toPrecision(5)}`;
                 chairs.innerHTML = `You have produced: ${totalChairs} chairs`;
-                clothAmt.innerHTML = `Cloth Chair: ${prodStats.clothAmount} ($24.90)`;
+                clothAmt.innerHTML = `Cloth Chair: ${prodStats.clothAmount} ($${prodStats.clothValue} (x${prodStats.officeMultiplier}))`;
                 clothProdButton.disabled = false;
             }, (prodStats.clothTime) * 1000);
             break;
@@ -117,7 +117,7 @@ function produce(e) {
                 totalDollars += (prodStats.officeValue * prodStats.officeMultiplier);
                 money.innerHTML = `You have: $${totalDollars.toPrecision(5)}`;
                 chairs.innerHTML = `You have produced: ${totalChairs} chairs`;
-                officeAmt.innerHTML = `Office Chair: ${prodStats.officeAmount} ($108.70)`;
+                officeAmt.innerHTML = `Office Chair: ${prodStats.officeAmount} ($${prodStats.officeValue} (x${prodStats.officeMultiplier}))`;
                 officeProdButton.disabled = false;
             }, (prodStats.officeTime) * 1000);
             break;
@@ -129,7 +129,7 @@ function produce(e) {
                 totalDollars += (prodStats.leatherValue * prodStats.leatherMultiplier);
                 money.innerHTML = `You have: $${totalDollars.toPrecision(5)}`;
                 chairs.innerHTML = `You have produced: ${totalChairs} chairs`;
-                leatherAmt.innerHTML = `Leather Chair: ${prodStats.leatherAmount} ($386)`;
+                leatherAmt.innerHTML = `Leather Chair: ${prodStats.leatherAmount} ($${prodStats.leatherValue} (x${prodStats.leatherMultiplier}))`;
                 leatherProdButton.disabled = false;
             }, (prodStats.leatherTime) * 1000);
             break;
@@ -148,7 +148,7 @@ function woodAutomate() {
     totalDollars += (prodStats.woodValue * prodStats.woodMultiplier);
     money.innerHTML = `You have: $${totalDollars.toPrecision(5)}`;
     chairs.innerHTML = `You have produced: ${totalChairs} chairs`;
-    woodAmt.innerHTML = `Wooden Chair: ${prodStats.woodAmount} ($${prodStats.woodValue})`;
+    woodAmt.innerHTML = `Wooden Chair: ${prodStats.woodAmount} ($${prodStats.woodValue} (x${prodStats.woodMultiplier}))`;
     woodAutoInterval = setInterval(woodAutomate, prodStats.woodTime * 1000);
 }
 
@@ -159,7 +159,7 @@ function clothAutomate() {
     totalDollars += (prodStats.clothValue * prodStats.clothMultiplier);
     money.innerHTML = `You have: $${totalDollars.toPrecision(5)}`;
     chairs.innerHTML = `You have produced: ${totalChairs} chairs`;
-    clothAmt.innerHTML = `Cloth Chair: ${prodStats.clothAmount} ($${prodStats.clothValue})`;
+    clothAmt.innerHTML = `Cloth Chair: ${prodStats.clothAmount} ($${prodStats.clothValue} (x${prodStats.clothMultiplier}))`;
     clothAutoInterval = setInterval(clothAutomate, prodStats.clothTime * 1000);
 }
 
@@ -170,7 +170,7 @@ function officeAutomate() {
     totalDollars += (prodStats.officeValue * prodStats.officeMultiplier);
     money.innerHTML = `You have: $${totalDollars.toPrecision(5)}`;
     chairs.innerHTML = `You have produced: ${totalChairs} chairs`;
-    officeAmt.innerHTML = `Office Chair: ${prodStats.officeAmount} ($${prodStats.officeValue})`;
+    officeAmt.innerHTML = `Office Chair: ${prodStats.officeAmount} ($${prodStats.officeValue} (x${prodStats.officeMultiplier}))`;
     officeAutoInterval = setInterval(officeAutomate, prodStats.officeTime * 1000);
 }
 
@@ -181,7 +181,7 @@ function leatherAutomate() {
     totalDollars += (prodStats.leatherValue * prodStats.leatherMultiplier);
     money.innerHTML = `You have: $${totalDollars.toPrecision(5)}`;
     chairs.innerHTML = `You have produced: ${totalChairs} chairs`;
-    leatherAmt.innerHTML = `Leather Chair: ${prodStats.leatherAmount} ($${prodStats.leatherValue})`;
+    leatherAmt.innerHTML = `Leather Chair: ${prodStats.leatherAmount} ($${prodStats.leatherValue} (x${prodStats.leatherMultiplier}))`;
     leatherAutoInterval = setInterval(leatherAutomate, prodStats.leatherTime * 1000);
 }
 
@@ -227,6 +227,7 @@ function upgrade(e) {
                 prodStats.woodDoubleUpgradeCost *= 2;
                 woodDouble.innerHTML = `Double Production: $${prodStats.woodDoubleUpgradeCost}`;
                 prodStats.woodMultiplier *= 2;
+                woodAmt.innerHTML = `Wooden Chair: ${prodStats.woodAmount} ($${prodStats.woodValue} (x${prodStats.woodMultiplier}))`
                 if (prodStats.woodMultiplier >= 4) {
                     prodStats.woodMultiplier = 4;
                     woodDouble.disabled = true;
@@ -279,6 +280,7 @@ function upgrade(e) {
                 prodStats.clothDoubleUpgradeCost *= 2;
                 clothDouble.innerHTML = `Double Production: $${prodStats.clothDoubleUpgradeCost}`;
                 prodStats.clothMultiplier *= 2;
+                clothAmt.innerHTML = `Cloth Chair: ${prodStats.clothAmount} ($${prodStats.clothValue} (x${prodStats.clothMultiplier}))`
                 if (prodStats.clothMultiplier >= 4) {
                     prodStats.clothMultiplier = 4;
                     clothDouble.disabled = true;
@@ -331,6 +333,7 @@ function upgrade(e) {
                 prodStats.officeDoubleUpgradeCost *= 2;
                 officeDouble.innerHTML = `Double Production: $${prodStats.officeDoubleUpgradeCost}`;
                 prodStats.officeMultiplier *= 2;
+                officeAmt.innerHTML = `Office Chair: ${prodStats.officeAmount} ($${prodStats.officeValue} (x${prodStats.officeMultiplier}))`
                 if (prodStats.officeMultiplier >= 4) {
                     prodStats.officeMultiplier = 4;
                     officeDouble.disabled = true;
@@ -383,6 +386,7 @@ function upgrade(e) {
                 prodStats.leatherDoubleUpgradeCost *= 2;
                 leatherDouble.innerHTML = `Double Production: $${prodStats.leatherDoubleUpgradeCost}`;
                 prodStats.leatherMultiplier *= 2;
+                leatherAmt.innerHTML = `Leather Chair: ${prodStats.leatherAmount} ($${prodStats.leatherValue} (x${prodStats.leatherMultiplier}))`
                 if (prodStats.leatherMultiplier >= 4) {
                     prodStats.leatherMultiplier = 4;
                     leatherDouble.disabled = true;

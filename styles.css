@@ -125,25 +125,25 @@ html {
 .wood-prod-timer {
     position: fixed;
     left: 25%;
-    top: 15.8%;
+    top: 16%;
 }
 
 .cloth-prod-timer {
     position: fixed;
     left: 25%;
-    top: 24%;
+    top: 24.5%;
 }
 
 .office-prod-timer {
     position: fixed;
     left: 25%;
-    top: 32.2%;
+    top: 32.6%;
 }
 
 .leather-prod-timer {
     position: fixed;
     left: 25%;
-    top: 40.5%;
+    top: 41%;
 }
 
 .cloth-unlock,
