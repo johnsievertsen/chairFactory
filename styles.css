@@ -56,38 +56,38 @@ html {
 .wood-produce {
     position: fixed;
     left: 1%;
-    top: 14.2%;
+    top: 15.5%;
 }
 
 .wood {
     left: 5%;
     position: fixed;
-    top: 14.5%;
+    top: 15.8%;
     color: white;
 }
 
 .cloth-produce {
     position: fixed;
     left: 1%;
-    top: 20.3%;
+    top: 24%;
 }
 
 .office-produce {
     position: fixed;
     left: 1%;
-    top: 26.1%;
+    top: 32.1%;
 }
 
 .leather-produce {
     position: fixed;
     left: 1%;
-    top: 32.3%;
+    top: 40.5%;
 }
 
 .cloth {
     position: fixed;
     left: 5%;
-    top: 20.5%;
+    top: 24.3%;
     opacity: 0.5;
     color: white;
 }
@@ -95,7 +95,7 @@ html {
 .office {
     position: fixed;
     left: 5%;
-    top: 26.3%;
+    top: 32.4%;
     opacity: 0.5;
     color: white;
 }
@@ -103,7 +103,7 @@ html {
 .leather {
     position: fixed;
     left: 5%;
-    top: 32.5%;
+    top: 40.8%;
     opacity: 0.5;
     color: white;
 }
@@ -125,25 +125,25 @@ html {
 .wood-prod-timer {
     position: fixed;
     left: 25%;
-    top: 14.5%;
+    top: 15.8%;
 }
 
 .cloth-prod-timer {
     position: fixed;
     left: 25%;
-    top: 20.3%;
+    top: 24%;
 }
 
 .office-prod-timer {
     position: fixed;
     left: 25%;
-    top: 26.2%;
+    top: 32.2%;
 }
 
 .leather-prod-timer {
     position: fixed;
     left: 25%;
-    top: 32.5%;
+    top: 40.5%;
 }
 
 .cloth-unlock,

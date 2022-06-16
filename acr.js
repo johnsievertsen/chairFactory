@@ -12,20 +12,24 @@ const woodAuto = document.querySelector('.wood-automate');
 const clothProdTime = document.querySelector('.cloth-prod-time');
 const clothAuto = document.querySelector('.cloth-automate');
 const woodTimer = document.querySelector('.wood-prod-timer');
+const woodDouble = document.querySelector('.wood-double');
 const clothTimer = document.querySelector('.cloth-prod-timer');
 const clothUnlock = document.querySelector('.cloth-unlock');
+const clothDouble = document.querySelector('.cloth-double');
 const officeProdButton = document.querySelector('.office-produce');
 const officeAmt = document.querySelector('.office');
 const officeProdTime = document.querySelector('.office-prod-time');
 const officeAuto = document.querySelector('.office-automate');
 const officeTimer = document.querySelector('.office-prod-timer');
 const officeUnlock = document.querySelector('.office-unlock');
+const officeDouble = document.querySelector('.office-double');
 const leatherProdButton = document.querySelector('.leather-produce');
 const leatherAmt = document.querySelector('.leather');
 const leatherProdTime = document.querySelector('.leather-prod-time');
 const leatherAuto = document.querySelector('.leather-automate');
 const leatherTimer = document.querySelector('.leather-prod-timer');
 const leatherUnlock = document.querySelector('.leather-unlock');
+const leatherDouble = document.querySelector('.leather-double');
 let totalDollars = 0;
 let totalChairs = 0;
 
@@ -33,12 +37,15 @@ function init() {
     clothProdButton.disabled = true;
     clothAuto.disabled = true;
     clothProdTime.disabled = true;
+    clothDouble.disabled = true;
     officeProdButton.disabled = true;
     officeAuto.disabled = true;
     officeProdTime.disabled = true;
+    officeDouble.disabled = true;
     leatherProdButton.disabled = true;
     leatherAuto.disabled = true;
     leatherProdTime.disabled = true;
+    leatherDouble.disabled = true;
 }
 init();
 
@@ -48,24 +55,32 @@ const prodStats = {
     woodAmount: 0,
     woodSpeedUpgradeCost: 50,
     woodAutoUpgradeCost: 1800,
+    woodDoubleUpgradeCost: 4400,
+    woodMultiplier: 1,
     clothTime: 10,
     clothValue: 24.9,
     clothAmount: 0,
     clothSpeedUpgradeCost: 250,
     clothAutoUpgradeCost: 5500,
+    clothDoubleUpgradeCost: 10296,
     clothUnlock: 140,
+    clothMultiplier: 1,
     officeTime: 60,
     officeValue: 108.7,
     officeAmount: 0,
     officeSpeedUpgradeCost: 742,
     officeAutoUpgradeCost: 9375,
+    officeDoubleUpgradeCost: 18050,
     officeUnlock: 1625,
+    officeMultiplier: 1,
     leatherTime: 180,
     leatherValue: 386,
     leatherAmount: 0,
     leatherSpeedUpgradeCost: 1502,
     leatherAutoUpgradeCost: 17832,
+    leatherDoubleUpgradeCost: 34102,
     leatherUnlock: 8309,
+    leatherMultiplier: 1,
 }
 
 function produce(e) {
@@ -73,9 +88,9 @@ function produce(e) {
         case 'wood-produce':
             woodProdButton.disabled = true;
             setTimeout(() => {
-                prodStats.woodAmount++;
-                totalChairs++;
-                totalDollars += prodStats.woodValue;
+                prodStats.woodAmount += (1 * prodStats.woodMultiplier);
+                totalChairs += (1 * prodStats.woodMultiplier);
+                totalDollars += (prodStats.woodValue * prodStats.woodMultiplier);
                 money.innerHTML = `You have: $${totalDollars.toPrecision(5)}`;
                 chairs.innerHTML = `You have produced: ${totalChairs} chairs`;
                 woodAmt.innerHTML = `Wooden Chair: ${prodStats.woodAmount} ($4.50)`;
@@ -85,9 +100,9 @@ function produce(e) {
         case 'cloth-produce':
             clothProdButton.disabled = true;
             setTimeout(() => {
-                prodStats.clothAmount++;
-                totalChairs++;
-                totalDollars += prodStats.clothValue;
+                prodStats.clothAmount += (1 * prodStats.clothMultiplier);
+                totalChairs += (1 * prodStats.clothMultiplier);
+                totalDollars += (prodStats.clothValue * prodStats.clothMultiplier);
                 money.innerHTML = `You have: $${totalDollars.toPrecision(5)}`;
                 chairs.innerHTML = `You have produced: ${totalChairs} chairs`;
                 clothAmt.innerHTML = `Cloth Chair: ${prodStats.clothAmount} ($24.90)`;
@@ -97,9 +112,9 @@ function produce(e) {
         case 'office-produce':
             officeProdButton.disabled = true;
             setTimeout(() => {
-                prodStats.officeAmount++;
-                totalChairs++;
-                totalDollars += prodStats.officeValue;
+                prodStats.officeAmount += (1 * prodStats.officeMultiplier);
+                totalChairs += (1 * prodStats.officeMultiplier);
+                totalDollars += (prodStats.officeValue * prodStats.officeMultiplier);
                 money.innerHTML = `You have: $${totalDollars.toPrecision(5)}`;
                 chairs.innerHTML = `You have produced: ${totalChairs} chairs`;
                 officeAmt.innerHTML = `Office Chair: ${prodStats.officeAmount} ($108.70)`;
@@ -109,9 +124,9 @@ function produce(e) {
         case 'leather-produce':
             leatherProdButton.disabled = true;
             setTimeout(() => {
-                prodStats.leatherAmount++;
-                totalChairs++;
-                totalDollars += prodStats.leatherValue;
+                prodStats.leatherAmount += (1 * prodStats.leatherMultiplier);
+                totalChairs += (1 * prodStats.leatherMultiplier);
+                totalDollars += (prodStats.leatherValue * prodStats.leatherMultiplier);
                 money.innerHTML = `You have: $${totalDollars.toPrecision(5)}`;
                 chairs.innerHTML = `You have produced: ${totalChairs} chairs`;
                 leatherAmt.innerHTML = `Leather Chair: ${prodStats.leatherAmount} ($386)`;
@@ -128,9 +143,9 @@ let leatherAutoInterval = null;
 
 function woodAutomate() {
     clearInterval(woodAutoInterval);
-    prodStats.woodAmount++;
-    totalChairs++;
-    totalDollars += prodStats.woodValue;
+    prodStats.woodAmount += (1 * prodStats.woodMultiplier);
+    totalChairs += (1 * prodStats.woodMultiplier);
+    totalDollars += (prodStats.woodValue * prodStats.woodMultiplier);
     money.innerHTML = `You have: $${totalDollars.toPrecision(5)}`;
     chairs.innerHTML = `You have produced: ${totalChairs} chairs`;
     woodAmt.innerHTML = `Wooden Chair: ${prodStats.woodAmount} ($${prodStats.woodValue})`;
@@ -139,9 +154,9 @@ function woodAutomate() {
 
 function clothAutomate() {
     clearInterval(clothAutoInterval);
-    prodStats.clothAmount++;
-    totalChairs++;
-    totalDollars += prodStats.clothValue;
+    prodStats.clothAmount += (1 * prodStats.clothMultiplier);
+    totalChairs += (1 * prodStats.clothMultiplier);
+    totalDollars += (prodStats.clothValue * prodStats.clothMultiplier);
     money.innerHTML = `You have: $${totalDollars.toPrecision(5)}`;
     chairs.innerHTML = `You have produced: ${totalChairs} chairs`;
     clothAmt.innerHTML = `Cloth Chair: ${prodStats.clothAmount} ($${prodStats.clothValue})`;
@@ -150,9 +165,9 @@ function clothAutomate() {
 
 function officeAutomate() {
     clearInterval(officeAutoInterval);
-    prodStats.officeAmount++;
-    totalChairs++;
-    totalDollars += prodStats.officeValue;
+    prodStats.officeAmount += (1 * prodStats.officeMultiplier);
+    totalChairs += (1 * prodStats.officeMultiplier);
+    totalDollars += (prodStats.officeValue * prodStats.officeMultiplier);
     money.innerHTML = `You have: $${totalDollars.toPrecision(5)}`;
     chairs.innerHTML = `You have produced: ${totalChairs} chairs`;
     officeAmt.innerHTML = `Office Chair: ${prodStats.officeAmount} ($${prodStats.officeValue})`;
@@ -161,9 +176,9 @@ function officeAutomate() {
 
 function leatherAutomate() {
     clearInterval(leatherAutoInterval);
-    prodStats.leatherAmount++;
-    totalChairs++;
-    totalDollars += prodStats.leatherValue;
+    prodStats.leatherAmount += (1 * prodStats.leatherMultiplier);
+    totalChairs += (1 * prodStats.leatherMultiplier);
+    totalDollars += (prodStats.leatherValue * prodStats.leatherMultiplier);
     money.innerHTML = `You have: $${totalDollars.toPrecision(5)}`;
     chairs.innerHTML = `You have produced: ${totalChairs} chairs`;
     leatherAmt.innerHTML = `Leather Chair: ${prodStats.leatherAmount} ($${prodStats.leatherValue})`;
@@ -205,6 +220,25 @@ function upgrade(e) {
                 setTimeout(function () { renameValue.placeholder = '' }, 3000);
                 break;
             }
+        case 'wood-double':
+            if (totalDollars >= prodStats.woodDoubleUpgradeCost) {
+                totalDollars -= prodStats.woodDoubleUpgradeCost;
+                money.innerHTML = `You have: $${totalDollars.toPrecision(5)}`;
+                prodStats.woodDoubleUpgradeCost *= 2;
+                woodDouble.innerHTML = `Double Production: $${prodStats.woodDoubleUpgradeCost}`;
+                prodStats.woodMultiplier *= 2;
+                if (prodStats.woodMultiplier >= 4) {
+                    prodStats.woodMultiplier = 4;
+                    woodDouble.disabled = true;
+                    woodDouble.innerHTML = 'Double Production: MAX';
+                    break;
+                }
+                break;
+            } else {
+                renameValue.placeholder = 'NOT ENOUGH MONEY';
+                setTimeout(function () { renameValue.placeholder = '' }, 3000);
+                break;
+            }
         case 'cloth-prod-time':
             if (totalDollars >= prodStats.clothSpeedUpgradeCost) {
                 totalDollars = (totalDollars - parseInt(prodStats.clothSpeedUpgradeCost).toPrecision(5));
@@ -232,6 +266,25 @@ function upgrade(e) {
                 clothAuto.disabled = true;
                 clothProdButton.disabled = true;
                 clothAutoInterval = setInterval(clothAutomate, prodStats.clothTime * 1000);
+                break;
+            } else {
+                renameValue.placeholder = 'NOT ENOUGH MONEY';
+                setTimeout(function () { renameValue.placeholder = '' }, 3000);
+                break;
+            }
+        case 'cloth-double':
+            if (totalDollars >= prodStats.clothDoubleUpgradeCost) {
+                totalDollars -= prodStats.clothDoubleUpgradeCost;
+                money.innerHTML = `You have: $${totalDollars.toPrecision(5)}`;
+                prodStats.clothDoubleUpgradeCost *= 2;
+                clothDouble.innerHTML = `Double Production: $${prodStats.clothDoubleUpgradeCost}`;
+                prodStats.clothMultiplier *= 2;
+                if (prodStats.clothMultiplier >= 4) {
+                    prodStats.clothMultiplier = 4;
+                    clothDouble.disabled = true;
+                    clothDouble.innerHTML = 'Double Production: MAX';
+                    break;
+                }
                 break;
             } else {
                 renameValue.placeholder = 'NOT ENOUGH MONEY';
@@ -271,6 +324,25 @@ function upgrade(e) {
                 setTimeout(function () { renameValue.placeholder = '' }, 3000);
                 break;
             }
+        case 'office-double':
+            if (totalDollars >= prodStats.officeDoubleUpgradeCost) {
+                totalDollars -= prodStats.officeDoubleUpgradeCost;
+                money.innerHTML = `You have: $${totalDollars.toPrecision(5)}`;
+                prodStats.officeDoubleUpgradeCost *= 2;
+                officeDouble.innerHTML = `Double Production: $${prodStats.officeDoubleUpgradeCost}`;
+                prodStats.officeMultiplier *= 2;
+                if (prodStats.officeMultiplier >= 4) {
+                    prodStats.officeMultiplier = 4;
+                    officeDouble.disabled = true;
+                    officeDouble.innerHTML = 'Double Production: MAX';
+                    break;
+                }
+                break;
+            } else {
+                renameValue.placeholder = 'NOT ENOUGH MONEY';
+                setTimeout(function () { renameValue.placeholder = '' }, 3000);
+                break;
+            }
         case 'leather-prod-time':
             if (totalDollars >= prodStats.leatherSpeedUpgradeCost) {
                 totalDollars = (totalDollars - parseInt(prodStats.leatherSpeedUpgradeCost.toPrecision(5)));
@@ -304,6 +376,25 @@ function upgrade(e) {
                 setTimeout(function () { renameValue.placeholder = '' }, 3000);
                 break;
             }
+        case 'leather-double':
+            if (totalDollars >= prodStats.leatherDoubleUpgradeCost) {
+                totalDollars -= prodStats.leatherDoubleUpgradeCost;
+                money.innerHTML = `You have: $${totalDollars.toPrecision(5)}`;
+                prodStats.leatherDoubleUpgradeCost *= 2;
+                leatherDouble.innerHTML = `Double Production: $${prodStats.leatherDoubleUpgradeCost}`;
+                prodStats.leatherMultiplier *= 2;
+                if (prodStats.leatherMultiplier >= 4) {
+                    prodStats.leatherMultiplier = 4;
+                    leatherDouble.disabled = true;
+                    leatherDouble.innerHTML = 'Double Production: MAX';
+                    break;
+                }
+                break;
+            } else {
+                renameValue.placeholder = 'NOT ENOUGH MONEY';
+                setTimeout(function () { renameValue.placeholder = '' }, 3000);
+                break;
+            }
     }
 }
 
@@ -325,6 +416,7 @@ function unlock(e) {
                 clothProdButton.disabled = false;
                 clothAuto.disabled = false;
                 clothProdTime.disabled = false;
+                clothDouble.disabled = false;
                 clothAmt.style.opacity = 1;
                 clothUnlock.style.display = 'none';
                 break;
@@ -340,6 +432,7 @@ function unlock(e) {
                 officeProdButton.disabled = false;
                 officeAuto.disabled = false;
                 officeProdTime.disabled = false;
+                officeDouble.disabled = false;
                 officeAmt.style.opacity = 1;
                 officeUnlock.style.display = 'none';
                 break;
@@ -355,6 +448,7 @@ function unlock(e) {
                 leatherProdButton.disabled = false;
                 leatherAuto.disabled = false;
                 leatherProdTime.disabled = false;
+                leatherDouble.disabled = false;
                 leatherAmt.style.opacity = 1;
                 leatherUnlock.style.display = 'none';
                 break;
@@ -382,3 +476,7 @@ leatherProdTime.addEventListener('click', upgrade);
 leatherAuto.addEventListener('click', upgrade);
 leatherProdButton.addEventListener('click', produce);
 leatherUnlock.addEventListener('click', unlock);
+woodDouble.addEventListener('click', upgrade);
+clothDouble.addEventListener('click', upgrade);
+officeDouble.addEventListener('click', upgrade);
+leatherDouble.addEventListener('click', upgrade);
