@@ -31,6 +31,7 @@ const leatherTimer = document.querySelector('.leather-prod-timer');
 const leatherUnlock = document.querySelector('.leather-unlock');
 const leatherDouble = document.querySelector('.leather-double');
 let totalDollars = 0;
+let totalDollarsArray = JSON.stringify(totalDollars).split('');
 let totalChairs = 0;
 
 function init() {
@@ -84,7 +85,10 @@ const prodStats = {
 }
 
 function formatMoney() {
+    let totalDollarsArray = JSON.stringify(totalDollars).split('');
     switch (true) {
+        case totalDollarsArray.length > 10:
+            totalDollars = Math.ceil(totalDollars);
         case totalDollars >= 0 && totalDollars <= 999:
             money.innerHTML = `You have: $${totalDollars}`;
             break;
