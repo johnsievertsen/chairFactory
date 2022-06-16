@@ -35,24 +35,22 @@ init();
 
 const prodStats = {
     woodTime: 3.25,
-    // woodROP: 0.2,
-    woodValue: 1.5,
+    woodValue: 13.5,
     woodAmount: 0,
-    woodSpeedUpgradeCost: 5,
-    woodAutoUpgradeCost: 120,
+    woodSpeedUpgradeCost: 50,
+    woodAutoUpgradeCost: 1200,
     clothTime: 10,
-    // clothROP: 0.067,
-    clothValue: 6.5,
+    clothValue: 24.99,
     clothAmount: 0,
-    clothSpeedUpgradeCost: 35,
-    clothAutoUpgradeCost: 550,
-    clothUnlock: 25,
+    clothSpeedUpgradeCost: 250,
+    clothAutoUpgradeCost: 5500,
+    clothUnlock: 140,
     officeTime: 60,
-    officeValue: 45,
+    officeValue: 48.7,
     officeAmount: 0,
-    officeSpeedUpgradeCost: 142,
-    officeAutoUpgradeCost: 1375,
-    officeUnlock: 625,
+    officeSpeedUpgradeCost: 742,
+    officeAutoUpgradeCost: 9375,
+    officeUnlock: 1625,
 }
 
 function produce(e) {
@@ -63,9 +61,9 @@ function produce(e) {
                 prodStats.woodAmount++;
                 totalChairs++;
                 totalDollars += prodStats.woodValue;
-                money.innerHTML = `You have: ${totalDollars} dollars`;
+                money.innerHTML = `You have: $${totalDollars}`;
                 chairs.innerHTML = `You have produced: ${totalChairs} chairs`;
-                woodAmt.innerHTML = `Wooden Chair: ${prodStats.woodAmount} ($1.50)`;
+                woodAmt.innerHTML = `Wooden Chair: ${prodStats.woodAmount} ($13.50)`;
                 woodProdButton.disabled = false;
             }, (prodStats.woodTime) * 1000);
             break;
@@ -75,9 +73,9 @@ function produce(e) {
                 prodStats.clothAmount++;
                 totalChairs++;
                 totalDollars += prodStats.clothValue;
-                money.innerHTML = `You have: ${totalDollars} dollars`;
+                money.innerHTML = `You have: $${totalDollars}`;
                 chairs.innerHTML = `You have produced: ${totalChairs} chairs`;
-                clothAmt.innerHTML = `Cloth Chair: ${prodStats.clothAmount} ($6.50)`;
+                clothAmt.innerHTML = `Cloth Chair: ${prodStats.clothAmount} ($24.99)`;
                 clothProdButton.disabled = false;
             }, (prodStats.clothTime) * 1000);
             break;
@@ -87,9 +85,9 @@ function produce(e) {
                 prodStats.officeAmount++;
                 totalChairs++;
                 totalDollars += prodStats.officeValue;
-                money.innerHTML = `You have: ${totalDollars} dollars`;
+                money.innerHTML = `You have: $${totalDollars}`;
                 chairs.innerHTML = `You have produced: ${totalChairs} chairs`;
-                officeAmt.innerHTML = `Office Chair: ${prodStats.officeAmount} ($45)`;
+                officeAmt.innerHTML = `Office Chair: ${prodStats.officeAmount} ($48.70)`;
                 officeProdButton.disabled = false;
             }, (prodStats.officeTime) * 1000);
             break;
@@ -138,14 +136,14 @@ function upgrade(e) {
         case 'wood-prod-time':
             if (totalDollars >= prodStats.woodSpeedUpgradeCost) {
                 totalDollars = parseInt((totalDollars - prodStats.woodSpeedUpgradeCost).toPrecision(4));
-                money.innerHTML = `You have: ${totalDollars} dollars`;
-                prodStats.woodTime /= 1.25;
-                if (prodStats.woodTime <= 0.1) {
-                    prodStats.woodTime = 0.1;
+                money.innerHTML = `You have: $${totalDollars}`;
+                prodStats.woodTime /= 1.2;
+                if (prodStats.woodTime <= 0.05) {
+                    prodStats.woodTime = 0.05;
                     woodProdTime.disabled = true;
                 }
                 woodTimer.innerHTML = `${prodStats.woodTime.toPrecision(4)}s`;
-                prodStats.woodSpeedUpgradeCost = parseInt((prodStats.woodSpeedUpgradeCost * 1.25).toPrecision(4));
+                prodStats.woodSpeedUpgradeCost = parseInt((prodStats.woodSpeedUpgradeCost * 1.25).toPrecision(5));
                 woodProdTime.innerHTML = `Reduce Time: $${prodStats.woodSpeedUpgradeCost}`;
                 break;
             } else {
@@ -156,7 +154,7 @@ function upgrade(e) {
         case 'wood-automate':
             if (totalDollars >= prodStats.woodAutoUpgradeCost) {
                 totalDollars -= prodStats.woodAutoUpgradeCost;
-                money.innerHTML = `You have: ${totalDollars} dollars`;
+                money.innerHTML = `You have: $${totalDollars}`;
                 woodAuto.disabled = true;
                 woodProdButton.disabled = true;
                 woodAutoInterval = setInterval(woodAutomate, prodStats.woodTime * 1000);
@@ -169,14 +167,14 @@ function upgrade(e) {
         case 'cloth-prod-time':
             if (totalDollars >= prodStats.clothSpeedUpgradeCost) {
                 totalDollars = parseInt((totalDollars - prodStats.clothSpeedUpgradeCost).toPrecision(4));
-                money.innerHTML = `You have: ${totalDollars} dollars`;
-                prodStats.clothTime /= 1.25;
-                if (prodStats.clothTime <= 0.1) {
-                    prodStats.clothTime = 0.1;
+                money.innerHTML = `You have: $${totalDollars}`;
+                prodStats.clothTime /= 1.2;
+                if (prodStats.clothTime <= 0.05) {
+                    prodStats.clothTime = 0.05;
                     clothProdTime.disabled = true;
                 }
                 clothTimer.innerHTML = `${prodStats.clothTime.toPrecision(4)}s`;
-                prodStats.clothSpeedUpgradeCost = parseInt((prodStats.clothSpeedUpgradeCost * 1.4).toPrecision(4));
+                prodStats.clothSpeedUpgradeCost = parseInt((prodStats.clothSpeedUpgradeCost * 1.4).toPrecision(5));
                 clothProdTime.innerHTML = `Reduce Time: $${prodStats.clothSpeedUpgradeCost}`;
                 break;
             } else {
@@ -187,7 +185,7 @@ function upgrade(e) {
         case 'cloth-automate':
             if (totalDollars >= prodStats.clothAutoUpgradeCost) {
                 totalDollars -= prodStats.clothAutoUpgradeCost;
-                money.innerHTML = `You have: ${totalDollars} dollars`;
+                money.innerHTML = `You have: $${totalDollars}`;
                 clothAuto.disabled = true;
                 clothProdButton.disabled = true;
                 clothAutoInterval = setInterval(clothAutomate, prodStats.clothTime * 1000);
@@ -200,14 +198,14 @@ function upgrade(e) {
         case 'office-prod-time':
             if (totalDollars >= prodStats.officeSpeedUpgradeCost) {
                 totalDollars = (totalDollars - parseInt(prodStats.officeSpeedUpgradeCost.toPrecision(4)));
-                money.innerHTML = `You have: ${totalDollars} dollars`;
-                prodStats.officeTime /= 1.25;
-                if (prodStats.officeTime <= 0.1) {
-                    prodStats.officeTime = 0.1;
+                money.innerHTML = `You have: $${totalDollars}`;
+                prodStats.officeTime /= 1.15;
+                if (prodStats.officeTime <= 0.05) {
+                    prodStats.officeTime = 0.05;
                     officeProdTime.disabled = true;
                 }
                 officeTimer.innerHTML = `${prodStats.officeTime.toPrecision(4)}s`;
-                prodStats.officeSpeedUpgradeCost = parseInt((prodStats.officeSpeedUpgradeCost * 1.5).toPrecision(4));
+                prodStats.officeSpeedUpgradeCost = parseInt((prodStats.officeSpeedUpgradeCost * 1.5).toPrecision(5));
                 officeProdTime.innerHTML = `Reduce Time: $${prodStats.officeSpeedUpgradeCost}`;
                 break;
             } else {
@@ -218,7 +216,7 @@ function upgrade(e) {
         case 'office-automate':
             if (totalDollars >= prodStats.officeAutoUpgradeCost) {
                 totalDollars -= prodStats.officeAutoUpgradeCost;
-                money.innerHTML = `You have: ${totalDollars} dollars`;
+                money.innerHTML = `You have: $${totalDollars}`;
                 officeAuto.disabled = true;
                 officeProdButton.disabled = true;
                 console.log(officeProdButton.disabled);
@@ -246,7 +244,7 @@ function unlock(e) {
         case 'cloth-prod-timer cloth-unlock':
             if (totalDollars >= prodStats.clothUnlock) {
                 totalDollars -= prodStats.clothUnlock;
-                money.innerHTML = `You have: ${totalDollars} dollars`;
+                money.innerHTML = `You have: $${totalDollars}`;
                 clothProdButton.disabled = false;
                 clothAuto.disabled = false;
                 clothProdTime.disabled = false;
@@ -261,7 +259,7 @@ function unlock(e) {
         case 'office-prod-timer office-unlock':
             if (totalDollars >= prodStats.officeUnlock) {
                 totalDollars -= prodStats.officeUnlock;
-                money.innerHTML = `You have: ${totalDollars} dollars`;
+                money.innerHTML = `You have: $${totalDollars}`;
                 officeProdButton.disabled = false;
                 officeAuto.disabled = false;
                 officeProdTime.disabled = false;
