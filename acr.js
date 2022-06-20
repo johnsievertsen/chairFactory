@@ -531,7 +531,7 @@ function upgrade(e) {
     switch (e.target.className) {
         case 'wood-prod-time':
             if (totalDollars >= prodStats.woodSpeedUpgradeCost) {
-                totalDollars = (totalDollars - parseInt(prodStats.woodSpeedUpgradeCost).toPrecision(5));
+                totalDollars = (totalDollars - parseInt(prodStats.woodSpeedUpgradeCost).toPrecision(15));
                 localStorage.setItem('totalDollars', totalDollars);
                 formatMoney();
                 prodStats.woodTime /= 1.2;
@@ -597,7 +597,7 @@ function upgrade(e) {
             }
         case 'cloth-prod-time':
             if (totalDollars >= prodStats.clothSpeedUpgradeCost) {
-                totalDollars = (totalDollars - parseInt(prodStats.clothSpeedUpgradeCost).toPrecision(5));
+                totalDollars = (totalDollars - parseInt(prodStats.clothSpeedUpgradeCost).toPrecision(15));
                 localStorage.setItem('totalDollars', totalDollars);
                 formatMoney();
                 prodStats.clothTime /= 1.28;
@@ -663,7 +663,7 @@ function upgrade(e) {
             }
         case 'office-prod-time':
             if (totalDollars >= prodStats.officeSpeedUpgradeCost) {
-                totalDollars = (totalDollars - parseInt(prodStats.officeSpeedUpgradeCost.toPrecision(5)));
+                totalDollars = (totalDollars - parseInt(prodStats.officeSpeedUpgradeCost.toPrecision(15)));
                 localStorage.setItem('totalDollars', totalDollars);
                 formatMoney();
                 prodStats.officeTime /= 1.3;
@@ -729,7 +729,7 @@ function upgrade(e) {
             }
         case 'leather-prod-time':
             if (totalDollars >= prodStats.leatherSpeedUpgradeCost) {
-                totalDollars = (totalDollars - parseInt(prodStats.leatherSpeedUpgradeCost.toPrecision(5)));
+                totalDollars = (totalDollars - parseInt(prodStats.leatherSpeedUpgradeCost.toPrecision(15)));
                 localStorage.setItem('totalDollars', totalDollars);
                 formatMoney();
                 prodStats.leatherTime /= 1.35;
