@@ -30,25 +30,9 @@ const leatherAuto = document.querySelector('.leather-automate');
 const leatherTimer = document.querySelector('.leather-prod-timer');
 const leatherUnlock = document.querySelector('.leather-unlock');
 const leatherDouble = document.querySelector('.leather-double');
-let totalDollars = 0;
+let totalDollars = localStorage.getItem('totalDollars');
 let totalDollarsArray = JSON.stringify(totalDollars).split('');
 let totalChairs = 0;
-
-function init() {
-    clothProdButton.disabled = true;
-    clothAuto.disabled = true;
-    clothProdTime.disabled = true;
-    clothDouble.disabled = true;
-    officeProdButton.disabled = true;
-    officeAuto.disabled = true;
-    officeProdTime.disabled = true;
-    officeDouble.disabled = true;
-    leatherProdButton.disabled = true;
-    leatherAuto.disabled = true;
-    leatherProdTime.disabled = true;
-    leatherDouble.disabled = true;
-}
-init();
 
 const prodStats = {
     woodTime: 3.25,
@@ -84,11 +68,293 @@ const prodStats = {
     leatherMultiplier: 1,
 }
 
-function formatMoney() {
+function init() {
+    switch (true) { //init all needed values
+        case !localStorage.getItem('totalDollars'):
+            localStorage.setItem('totalDollars', 0);
+            console.log('initializing-totalDollars');
+        case !localStorage.getItem('totalChairs'):
+            localStorage.setItem('totalChairs', 0);
+            console.log('initializing-totalChairs')
+        case !localStorage.getItem('factoryName'):
+            localStorage.setItem('factoryName', 'Your Chair Factory');
+            console.log('initializing-factoryName');
+        case !localStorage.getItem('woodProdButtonDisabled'):
+            localStorage.setItem('woodProdButtonDisabled', false);
+            console.log('initializing-woodProdButtonDisabled');
+        case !localStorage.getItem('woodProdTimeDisabled'):
+            localStorage.setItem('woodProdTimeDisabled', false);
+            console.log('initializing-woodProdTimeDisabled');
+        case !localStorage.getItem('woodAutoDisabled'):
+            localStorage.setItem('woodAutoDisabled', false);
+            console.log('initializing-woodAutoDisabled');
+        case !localStorage.getItem('woodDoubleDisabled'):
+            localStorage.setItem('woodDoubleDisabled', false);
+            console.log('initializing-woodDoubleDisabled');
+        case !localStorage.getItem('clothProdButtonDisabled'):
+            localStorage.setItem('clothProdButtonDisabled', true);
+            console.log('initializing-clothProdButton');
+        case !localStorage.getItem('clothAutoDisabled'):
+            localStorage.setItem('clothAutoDisabled', true);
+            console.log('initializing-clothAuto');
+        case !localStorage.getItem('clothProdTimeDisabled'):
+            localStorage.setItem('clothProdTimeDisabled', true);
+            console.log('initializing-ProdTime');
+        case !localStorage.getItem('clothDoubleDisabled'):
+            localStorage.setItem('clothDoubleDisabled', true);
+            console.log('initializing-clothDouble');
+        case !localStorage.getItem('officeProdButtonDisabled'):
+            localStorage.setItem('officeProdButtonDisabled', true);
+            console.log('initializing-officeProdButton');
+        case !localStorage.getItem('officeAutoDisabled'):
+            localStorage.setItem('officeAutoDisabled', true);
+            console.log('initializing-officeAuto');
+        case !localStorage.getItem('officeProdTimeDisabled'):
+            localStorage.setItem('officeProdTimeDisabled', true);
+            console.log('initializing-officeProdTime');
+        case !localStorage.getItem('officeDoubleDisabled'):
+            localStorage.setItem('officeDoubleDisabled', true);
+            console.log('initializing-officeDouble');
+        case !localStorage.getItem('leatherProdButtonDisabled'):
+            localStorage.setItem('leatherProdButtonDisabled', true);
+            console.log('initializing-leatherProdButtonDisabled');
+        case !localStorage.getItem('leatherAutoDisabled'):
+            localStorage.setItem('leatherAutoDisabled', true);
+            console.log('initializing-leatherAuto');
+        case !localStorage.getItem('leatherProdTimeDisabled'):
+            localStorage.setItem('leatherProdTimeDisabled', true);
+            console.log('initializing-leatherProdTime');
+        case !localStorage.getItem('leatherDoubleDisabled'):
+            localStorage.setItem('leatherDoubleDisabled', true);
+            console.log('initializing-leatherDouble');
+        case !localStorage.getItem('clothUnlockStyleDisplay'):
+            localStorage.setItem('clothUnlockStyleDisplay', 'block')
+            console.log('initializing-clothUnlockStyleDisplay');
+        case !localStorage.getItem('officeUnlockStyleDisplay'):
+            localStorage.setItem('officeUnlockStyleDisplay', 'block')
+            console.log('initializing-officeUnlockStyleDisplay');
+        case !localStorage.getItem('leatherUnlockStyleDisplay'):
+            localStorage.setItem('leatherUnlockStyleDisplay', 'block')
+            console.log('initializing-leatherUnlockStyleDisplay');
+        case !localStorage.getItem('woodTime'):
+            localStorage.setItem('woodTime', 3.25);
+            console.log('initializing-woodTime');
+        case !localStorage.getItem('woodAmount'):
+            localStorage.setItem('woodAmount', 0);
+            console.log('initializing-woodAmount');
+        case !localStorage.getItem('woodSpeedUpgradeCost'):
+            localStorage.setItem('woodSpeedUpgradeCost', 50);
+            console.log('initializing-woodSpeedUpgradeCost');
+        case !localStorage.getItem('woodDoubleUpgradeCost'):
+            localStorage.setItem('woodDoubleUpgradeCost', 4400);
+            console.log('initializing-woodDoubleUpgradeCost');
+        case !localStorage.getItem('woodMultiplier'):
+            localStorage.setItem('woodMultiplier', 1);
+            console.log('initializing-woodMultiplier');
+        case !localStorage.getItem('clothTime'):
+            localStorage.setItem('clothTime', 10);
+            console.log('initializing-clothTime');
+        case !localStorage.getItem('clothAmount'):
+            localStorage.setItem('clothAmount', 0);
+            console.log('initializing-clothAmount');
+        case !localStorage.getItem('clothSpeedUpgradeCost'):
+            localStorage.setItem('clothSpeedUpgradeCost', 250);
+            console.log('initializing-clothSpeedUpgradeCost');
+        case !localStorage.getItem('clothDoubleUpgradeCost'):
+            localStorage.setItem('clothDoubleUpgradeCost', 10296);
+            console.log('initializing-clothDoubleUpgradeCost');
+        case !localStorage.getItem('clothMultiplier'):
+            localStorage.setItem('clothMultiplier', 1);
+            console.log('initializing-clothMultiplier');
+        case !localStorage.getItem('officeTime'):
+            localStorage.setItem('officeTime', 60);
+            console.log('initializing-officeTime');
+        case !localStorage.getItem('officeAmount'):
+            localStorage.setItem('officeAmount', 0);
+            console.log('initializing-officeAmount');
+        case !localStorage.getItem('officeSpeedUpgradeCost'):
+            localStorage.setItem('officeSpeedUpgradeCost', 742);
+            console.log('initializing-officeSpeedUpgradeCost');
+        case !localStorage.getItem('officeDoubleUpgradeCost'):
+            localStorage.setItem('officeDoubleUpgradeCost', 18050);
+            console.log('initializing-officeDoubleUpgradeCost');
+        case !localStorage.getItem('officeMultiplier'):
+            localStorage.setItem('officeMultiplier', 1);
+            console.log('initializing-officeMultiplier');
+        case !localStorage.getItem('leatherTime'):
+            localStorage.setItem('leatherTime', 180);
+            console.log('initializing-leatherTime');
+        case !localStorage.getItem('leatherAmount'):
+            localStorage.setItem('leatherAmount', 0);
+            console.log('initializing-leatherAmount');
+        case !localStorage.getItem('leatherSpeedUpgradeCost'):
+            localStorage.setItem('leatherSpeedUpgradeCost', 1502);
+            console.log('initializing-leatherSpeedUpgradeCost');
+        case !localStorage.getItem('leatherDoubleUpgradeCost'):
+            localStorage.setItem('leatherDoubleUpgradeCost', 34102);
+            console.log('initializing-leatherDoubleUpgradeCost');
+        case !localStorage.getItem('leatherMultiplier'):
+            localStorage.setItem('leatherMultiplier', 1);
+            console.log('initializing-leatherMultiplier');
+        case !localStorage.getItem('woodAutoIntervalBool'):
+            localStorage.setItem('woodAutoIntervalBool', false);
+            console.log('initializing-woodAutoIntervalBool');
+        case !localStorage.getItem('clothAutoIntervalBool'):
+            localStorage.setItem('clothAutoIntervalBool', false);
+            console.log('initializing-clothAutoIntervalBool');
+        case !localStorage.getItem('officeAutoIntervalBool'):
+            localStorage.setItem('officeAutoIntervalBool', false);
+            console.log('initializing-officeAutoIntervalBool');
+        case !localStorage.getItem('leatherAutoIntervalBool'):
+            localStorage.setItem('leatherAutoIntervalBool', false);
+            console.log('initializing-leatherAutoIntervalBool');
+        case !localStorage.getItem('clothAmtOpacity'):
+            localStorage.setItem('clothAmtOpacity', 0.5);
+            console.log('initializing-clothAmtOpacity');
+        case !localStorage.getItem('officeAmtOpacity'):
+            localStorage.setItem('officeAmtOpacity', 0.5);
+            console.log('initializing-officeAmtOpacity');
+        case !localStorage.getItem('leatherAmtOpacity'):
+            localStorage.setItem('leatherAmtOpacity', 0.5);
+            console.log('initializing-leatherAmtOpacity');
+    }
+    totalDollars = JSON.parse(localStorage.getItem('totalDollars'));
+    formatMoney();
+    totalChairs = JSON.parse(localStorage.getItem('totalChairs'));
+    factoryName.innerHTML = localStorage.getItem('factoryName');
+    woodProdButton.disabled = JSON.parse(localStorage.getItem('woodProdButtonDisabled'));
+    woodProdTime.disabled = JSON.parse(localStorage.getItem('woodProdTimeDisabled'));
+    woodAuto.disabled = JSON.parse(localStorage.getItem('woodAutoDisabled'));
+    woodDouble.disabled = JSON.parse(localStorage.getItem('woodDoubleDisabled'));
+    clothProdButton.disabled = JSON.parse(localStorage.getItem('clothProdButtonDisabled'));
+    clothAuto.disabled = JSON.parse(localStorage.getItem('clothAutoDisabled'));
+    clothProdTime.disabled = JSON.parse(localStorage.getItem('clothProdTimeDisabled'));
+    clothDouble.disabled = JSON.parse(localStorage.getItem('clothDoubleDisabled'));
+    officeProdButton.disabled = JSON.parse(localStorage.getItem('officeProdButtonDisabled'));
+    officeAuto.disabled = JSON.parse(localStorage.getItem('officeAutoDisabled'));
+    officeProdTime.disabled = JSON.parse(localStorage.getItem('officeProdTimeDisabled'));
+    officeDouble.disabled = JSON.parse(localStorage.getItem('officeDoubleDisabled'));
+    leatherProdButton.disabled = JSON.parse(localStorage.getItem('leatherProdButtonDisabled'));
+    leatherAuto.disabled = JSON.parse(localStorage.getItem('leatherAutoDisabled'));
+    leatherProdTime.disabled = JSON.parse(localStorage.getItem('leatherProdTimeDisabled'));
+    leatherDouble.disabled = JSON.parse(localStorage.getItem('leatherDoubleDisabled'));
+    clothUnlock.style.display = (localStorage.getItem('clothUnlockStyleDisplay'));
+    officeUnlock.style.display = (localStorage.getItem('officeUnlockStyleDisplay'));
+    leatherUnlock.style.display = (localStorage.getItem('leatherUnlockStyleDisplay'));
+    prodStats.woodTime = JSON.parse(localStorage.getItem('woodTime'));
+    prodStats.woodAmount = JSON.parse(localStorage.getItem('woodAmount'));
+    prodStats.woodSpeedUpgradeCost = JSON.parse(localStorage.getItem('woodSpeedUpgradeCost'));
+    prodStats.woodDoubleUpgradeCost = JSON.parse(localStorage.getItem('woodDoubleUpgradeCost'));
+    prodStats.woodMultiplier = JSON.parse(localStorage.getItem('woodMultiplier'));
+    prodStats.clothTime = JSON.parse(localStorage.getItem('clothTime'));
+    prodStats.clothAmount = JSON.parse(localStorage.getItem('clothAmount'));
+    prodStats.clothSpeedUpgradeCost = JSON.parse(localStorage.getItem('clothSpeedUpgradeCost'));
+    prodStats.clothDoubleUpgradeCost = JSON.parse(localStorage.getItem('clothDoubleUpgradeCost'));
+    prodStats.clothMultiplier = JSON.parse(localStorage.getItem('clothMultiplier'));
+    prodStats.officeTime = JSON.parse(localStorage.getItem('officeTime'));
+    prodStats.officeAmount = JSON.parse(localStorage.getItem('officeAmount'));
+    prodStats.officeSpeedUpgradeCost = JSON.parse(localStorage.getItem('officeSpeedUpgradeCost'));
+    prodStats.officeDoubleUpgradeCost = JSON.parse(localStorage.getItem('officeDoubleUpgradeCost'));
+    prodStats.officeMultiplier = JSON.parse(localStorage.getItem('officeMultiplier'));
+    prodStats.leatherTime = JSON.parse(localStorage.getItem('leatherTime'));
+    prodStats.leatherAmount = JSON.parse(localStorage.getItem('leatherAmount'));
+    prodStats.leatherSpeedUpgradeCost = JSON.parse(localStorage.getItem('leatherSpeedUpgradeCost'));
+    prodStats.leatherDoubleUpgradeCost = JSON.parse(localStorage.getItem('leatherDoubleUpgradeCost'));
+    prodStats.leatherMultiplier = JSON.parse(localStorage.getItem('leatherMultiplier'));
+    clothAmt.style.opacity = JSON.parse(localStorage.getItem('clothAmtOpacity'));
+    officeAmt.style.opacity = JSON.parse(localStorage.getItem('officeAmtOpacity'));
+    leatherAmt.style.opacity = JSON.parse(localStorage.getItem('leatherAmtOpacity'));
+    pageLoad();
+}
+init();
+
+function pageLoad() {
+    woodAmt.innerHTML = `Wooden Chair: ${prodStats.woodAmount} ($${prodStats.woodValue} (x${prodStats.woodMultiplier}))`;
+    chairs.innerHTML = `You have produced: ${totalChairs} chairs`;
+    clothAmt.innerHTML = `Cloth Chair: ${prodStats.clothAmount} ($${prodStats.clothValue} (x${prodStats.clothMultiplier}))`;
+    if (prodStats.woodTime > 0.05) {
+        woodProdTime.innerHTML = `Reduce Time: $${prodStats.woodSpeedUpgradeCost}`;
+    } else {
+        woodProdTime.innerHTML = `Reduce Time: MAX`;
+    }
+    if (prodStats.clothTime > 0.2) {
+        clothProdTime.innerHTML = `Reduce Time: $${prodStats.clothSpeedUpgradeCost}`;
+    } else {
+        clothProdTime.innerHTML = `Reduce Time: MAX`;
+    }
+    woodTimer.innerHTML = `${prodStats.woodTime.toPrecision(4)}s`;
+    if (prodStats.woodMultiplier < 4) {
+        woodDouble.innerHTML = `Double Production: $${prodStats.woodDoubleUpgradeCost}`;
+    } else {
+        woodDouble.innerHTML = `Double Production: MAX`;
+    }
+    clothTimer.innerHTML = `${prodStats.clothTime.toPrecision(4)}s`;
+    if (prodStats.clothMultiplier < 4) {
+        clothDouble.innerHTML = `Double Production: $${prodStats.clothDoubleUpgradeCost}`;
+    } else {
+        clothDouble.innerHTML = `Double Production: MAX`;
+    }
+    officeAmt.innerHTML = `Office Chair: ${prodStats.officeAmount} ($${prodStats.officeValue} (x${prodStats.officeMultiplier}))`;
+    if (prodStats.officeTime > 0.8) {
+        officeProdTime.innerHTML = `Reduce Time: $${prodStats.officeSpeedUpgradeCost}`;
+    } else {
+        officeProdTime.innerHTML = `Reduce Time: MAX`;
+    }
+    officeTimer.innerHTML = `${prodStats.officeTime.toPrecision(4)}s`;
+    if (prodStats.officeMultiplier < 4) {
+        officeDouble.innerHTML = `Double Production: $${prodStats.officeDoubleUpgradeCost}`;
+    } else {
+        officeDouble.innerHTML = `Double Production: MAX`;
+    }
+    leatherAmt.innerHTML = `Leather Chair: ${prodStats.leatherAmount} ($${prodStats.leatherValue} (x${prodStats.leatherMultiplier}))`;
+    if (prodStats.leatherTime > 1) {
+        leatherProdTime.innerHTML = `Reduce Time: $${prodStats.leatherSpeedUpgradeCost}`;
+    } else {
+        leatherProdTime.innerHTML = `Reduce Time: MAX`;
+    }
+    leatherTimer.innerHTML = `${prodStats.leatherTime.toPrecision(4)}s`;
+    if (prodStats.leatherMultiplier < 4) {
+        leatherDouble.innerHTML = `Double Production: $${prodStats.leatherDoubleUpgradeCost}`;
+    } else {
+        leatherDouble.innerHTML = `Double Production: MAX`;
+    }
+}
+
+let woodAutoIntervalBool = JSON.parse(localStorage.getItem('woodAutoIntervalBool'));
+let clothAutoIntervalBool = JSON.parse(localStorage.getItem('clothAutoIntervalBool'));
+let officeAutoIntervalBool = JSON.parse(localStorage.getItem('officeAutoIntervalBool'));
+let leatherAutoIntervalBool = JSON.parse(localStorage.getItem('leatherAutoIntervalBool'));
+
+automateInit();
+function automateInit() {
+    if (woodAutoIntervalBool === true) {
+        woodAutoInterval = setInterval(woodAutomate, prodStats.woodTime * 1000);
+    } else {
+        woodAutoInterval = null;
+    }
+    if (clothAutoIntervalBool === true) {
+        clothAutoInterval = setInterval(clothAutomate, prodStats.clothTime * 1000);
+    } else {
+        clothAutoInterval = null;
+    }
+    if (officeAutoIntervalBool === true) {
+        officeAutoInterval = setInterval(officeAutomate, prodStats.officeTime * 1000);
+    } else {
+        offficeAutoInterval = null;
+    }
+    if (leatherAutoIntervalBool === true) {
+        leatherAutoInterval = setInterval(leatherAutomate, prodStats.leatherTime * 1000);
+    } else {
+        leatherAutoInterval = null;
+    }
+}
+
+function formatMoney() { //no changes needed for localStorage
     let totalDollarsArray = JSON.stringify(totalDollars).split('');
     switch (true) {
         case totalDollarsArray.length > 10:
             totalDollars = Math.ceil(totalDollars);
+            localStorage.setItem('totalDollars', totalDollars);
         case totalDollars >= 0 && totalDollars <= 999:
             money.innerHTML = `You have: $${totalDollars}`;
             break;
@@ -132,6 +398,9 @@ function produce(e) {
                 prodStats.woodAmount += (1 * prodStats.woodMultiplier);
                 totalChairs += (1 * prodStats.woodMultiplier);
                 totalDollars += (prodStats.woodValue * prodStats.woodMultiplier);
+                localStorage.setItem('woodAmount', prodStats.woodAmount);
+                localStorage.setItem('totalDollars', totalDollars);
+                localStorage.setItem('totalChairs', totalChairs);
                 formatMoney();
                 chairs.innerHTML = `You have produced: ${totalChairs} chairs`;
                 woodAmt.innerHTML = `Wooden Chair: ${prodStats.woodAmount} ($${prodStats.woodValue} (x${prodStats.woodMultiplier}))`;
@@ -144,6 +413,9 @@ function produce(e) {
                 prodStats.clothAmount += (1 * prodStats.clothMultiplier);
                 totalChairs += (1 * prodStats.clothMultiplier);
                 totalDollars += (prodStats.clothValue * prodStats.clothMultiplier);
+                localStorage.setItem('clothAmount', prodStats.clothAmount);
+                localStorage.setItem('totalDollars', totalDollars);
+                localStorage.setItem('totalChairs', totalChairs);
                 formatMoney();
                 chairs.innerHTML = `You have produced: ${totalChairs} chairs`;
                 clothAmt.innerHTML = `Cloth Chair: ${prodStats.clothAmount} ($${prodStats.clothValue} (x${prodStats.officeMultiplier}))`;
@@ -156,6 +428,9 @@ function produce(e) {
                 prodStats.officeAmount += (1 * prodStats.officeMultiplier);
                 totalChairs += (1 * prodStats.officeMultiplier);
                 totalDollars += (prodStats.officeValue * prodStats.officeMultiplier);
+                localStorage.setItem('officeAmount', prodStats.officeAmount);
+                localStorage.setItem('totalDollars', totalDollars);
+                localStorage.setItem('totalChairs', totalChairs);
                 formatMoney();
                 chairs.innerHTML = `You have produced: ${totalChairs} chairs`;
                 officeAmt.innerHTML = `Office Chair: ${prodStats.officeAmount} ($${prodStats.officeValue} (x${prodStats.officeMultiplier}))`;
@@ -168,6 +443,9 @@ function produce(e) {
                 prodStats.leatherAmount += (1 * prodStats.leatherMultiplier);
                 totalChairs += (1 * prodStats.leatherMultiplier);
                 totalDollars += (prodStats.leatherValue * prodStats.leatherMultiplier);
+                localStorage.setItem('leatherAmount', prodStats.leatherAmount);
+                localStorage.setItem('totalDollars', totalDollars);
+                localStorage.setItem('totalChairs', totalChairs);
                 formatMoney();
                 chairs.innerHTML = `You have produced: ${totalChairs} chairs`;
                 leatherAmt.innerHTML = `Leather Chair: ${prodStats.leatherAmount} ($${prodStats.leatherValue} (x${prodStats.leatherMultiplier}))`;
@@ -177,16 +455,14 @@ function produce(e) {
     }
 }
 
-let woodAutoInterval = null;
-let clothAutoInterval = null;
-let officeAutoInterval = null;
-let leatherAutoInterval = null;
-
 function woodAutomate() {
     clearInterval(woodAutoInterval);
     prodStats.woodAmount += (1 * prodStats.woodMultiplier);
     totalChairs += (1 * prodStats.woodMultiplier);
     totalDollars += (prodStats.woodValue * prodStats.woodMultiplier);
+    localStorage.setItem('woodAmount', prodStats.woodAmount);
+    localStorage.setItem('totalDollars', totalDollars);
+    localStorage.setItem('totalChairs', totalChairs);
     formatMoney();
     chairs.innerHTML = `You have produced: ${totalChairs} chairs`;
     woodAmt.innerHTML = `Wooden Chair: ${prodStats.woodAmount} ($${prodStats.woodValue} (x${prodStats.woodMultiplier}))`;
@@ -198,6 +474,9 @@ function clothAutomate() {
     prodStats.clothAmount += (1 * prodStats.clothMultiplier);
     totalChairs += (1 * prodStats.clothMultiplier);
     totalDollars += (prodStats.clothValue * prodStats.clothMultiplier);
+    localStorage.setItem('clothAmount', prodStats.clothAmount);
+    localStorage.setItem('totalDollars', totalDollars);
+    localStorage.setItem('totalChairs', totalChairs);
     formatMoney();
     chairs.innerHTML = `You have produced: ${totalChairs} chairs`;
     clothAmt.innerHTML = `Cloth Chair: ${prodStats.clothAmount} ($${prodStats.clothValue} (x${prodStats.clothMultiplier}))`;
@@ -209,6 +488,9 @@ function officeAutomate() {
     prodStats.officeAmount += (1 * prodStats.officeMultiplier);
     totalChairs += (1 * prodStats.officeMultiplier);
     totalDollars += (prodStats.officeValue * prodStats.officeMultiplier);
+    localStorage.setItem('officeAmount', prodStats.officeAmount);
+    localStorage.setItem('totalDollars', totalDollars);
+    localStorage.setItem('totalChairs', totalChairs);
     formatMoney();
     chairs.innerHTML = `You have produced: ${totalChairs} chairs`;
     officeAmt.innerHTML = `Office Chair: ${prodStats.officeAmount} ($${prodStats.officeValue} (x${prodStats.officeMultiplier}))`;
@@ -220,6 +502,9 @@ function leatherAutomate() {
     prodStats.leatherAmount += (1 * prodStats.leatherMultiplier);
     totalChairs += (1 * prodStats.leatherMultiplier);
     totalDollars += (prodStats.leatherValue * prodStats.leatherMultiplier);
+    localStorage.setItem('leatherAmount', prodStats.leatherAmount);
+    localStorage.setItem('totalDollars', totalDollars);
+    localStorage.setItem('totalChairs', totalChairs);
     formatMoney();
     chairs.innerHTML = `You have produced: ${totalChairs} chairs`;
     leatherAmt.innerHTML = `Leather Chair: ${prodStats.leatherAmount} ($${prodStats.leatherValue} (x${prodStats.leatherMultiplier}))`;
@@ -231,6 +516,7 @@ function upgrade(e) {
         case 'wood-prod-time':
             if (totalDollars >= prodStats.woodSpeedUpgradeCost) {
                 totalDollars = (totalDollars - parseInt(prodStats.woodSpeedUpgradeCost).toPrecision(5));
+                localStorage.setItem('totalDollars', totalDollars);
                 formatMoney();
                 prodStats.woodTime /= 1.2;
                 woodTimer.innerHTML = `${prodStats.woodTime.toPrecision(4)}s`;
@@ -241,7 +527,10 @@ function upgrade(e) {
                     woodProdTime.disabled = true;
                     woodProdTime.innerHTML = 'Reduce Time: MAX';
                     woodTimer.innerHTML = '0.05s (MAX)';
+                    localStorage.setItem('woodProdTimeDisabled', true);
                 }
+                localStorage.setItem('woodTime', prodStats.woodTime);
+                localStorage.setItem('woodSpeedUpgradeCost', prodStats.woodSpeedUpgradeCost);
                 break;
             } else {
                 renameValue.placeholder = 'NOT ENOUGH MONEY';
@@ -251,10 +540,15 @@ function upgrade(e) {
         case 'wood-automate':
             if (totalDollars >= prodStats.woodAutoUpgradeCost) {
                 totalDollars -= prodStats.woodAutoUpgradeCost;
+                localStorage.setItem('totalDollars', totalDollars);
                 formatMoney();
                 woodAuto.disabled = true;
                 woodProdButton.disabled = true;
-                woodAutoInterval = setInterval(woodAutomate, prodStats.woodTime * 1000);
+                woodAutoIntervalBool = true;
+                localStorage.setItem('woodAutoIntervalBool', true);
+                localStorage.setItem('woodAutoDisabled', true);
+                localStorage.setItem('woodProdButtonDisabled', true);
+                automateInit();
                 break;
             } else {
                 renameValue.placeholder = 'NOT ENOUGH MONEY';
@@ -264,14 +558,18 @@ function upgrade(e) {
         case 'wood-double':
             if (totalDollars >= prodStats.woodDoubleUpgradeCost) {
                 totalDollars -= prodStats.woodDoubleUpgradeCost;
+                localStorage.setItem('totalDollars', totalDollars);
                 formatMoney();
                 prodStats.woodDoubleUpgradeCost *= 2;
-                woodDouble.innerHTML = `Double Production: $${prodStats.woodDoubleUpgradeCost}`;
                 prodStats.woodMultiplier *= 2;
+                localStorage.setItem('woodDoubleUpgradeCost', prodStats.woodDoubleUpgradeCost);
+                localStorage.setItem('woodMultiplier', prodStats.woodMultiplier);
+                woodDouble.innerHTML = `Double Production: $${prodStats.woodDoubleUpgradeCost}`;
                 woodAmt.innerHTML = `Wooden Chair: ${prodStats.woodAmount} ($${prodStats.woodValue} (x${prodStats.woodMultiplier}))`
                 if (prodStats.woodMultiplier >= 4) {
                     prodStats.woodMultiplier = 4;
                     woodDouble.disabled = true;
+                    localStorage.setItem('woodDoubleDisabled', true);
                     woodDouble.innerHTML = 'Double Production: MAX';
                     break;
                 }
@@ -284,6 +582,7 @@ function upgrade(e) {
         case 'cloth-prod-time':
             if (totalDollars >= prodStats.clothSpeedUpgradeCost) {
                 totalDollars = (totalDollars - parseInt(prodStats.clothSpeedUpgradeCost).toPrecision(5));
+                localStorage.setItem('totalDollars', totalDollars);
                 formatMoney();
                 prodStats.clothTime /= 1.28;
                 clothTimer.innerHTML = `${prodStats.clothTime.toPrecision(4)}s`;
@@ -292,9 +591,12 @@ function upgrade(e) {
                 if (prodStats.clothTime <= 0.2) {
                     prodStats.clothTime = 0.2;
                     clothProdTime.disabled = true;
+                    localStorage.setItem('clothProdTimeDisabled', true);
                     clothProdTime.innerHTML = 'Reduce Time: MAX';
                     clothTimer.innerHTML = '0.2s (MAX)';
                 }
+                localStorage.setItem('clothTime', prodStats.clothTime);
+                localStorage.setItem('clothSpeedUpgradeCost', prodStats.clothSpeedUpgradeCost);
                 break;
             } else {
                 renameValue.placeholder = 'NOT ENOUGH MONEY';
@@ -304,10 +606,15 @@ function upgrade(e) {
         case 'cloth-automate':
             if (totalDollars >= prodStats.clothAutoUpgradeCost) {
                 totalDollars -= prodStats.clothAutoUpgradeCost;
+                localStorage.setItem('totalDollars', totalDollars);
                 formatMoney();
                 clothAuto.disabled = true;
                 clothProdButton.disabled = true;
-                clothAutoInterval = setInterval(clothAutomate, prodStats.clothTime * 1000);
+                clothAutoIntervalBool = true;
+                localStorage.setItem('clothAutoIntervalBool', true);
+                localStorage.setItem('clothAutoDisabled', true);
+                localStorage.setItem('clothProdButtonDisabled', true);
+                automateInit();
                 break;
             } else {
                 renameValue.placeholder = 'NOT ENOUGH MONEY';
@@ -317,14 +624,18 @@ function upgrade(e) {
         case 'cloth-double':
             if (totalDollars >= prodStats.clothDoubleUpgradeCost) {
                 totalDollars -= prodStats.clothDoubleUpgradeCost;
+                localStorage.setItem('totalDollars', totalDollars);
                 formatMoney();
                 prodStats.clothDoubleUpgradeCost *= 2;
-                clothDouble.innerHTML = `Double Production: $${prodStats.clothDoubleUpgradeCost}`;
                 prodStats.clothMultiplier *= 2;
+                localStorage.setItem('clothDoubleUpgradeCost', prodStats.clothDoubleUpgradeCost);
+                localStorage.setItem('clothMultiplier', prodStats.clothMultiplier);
+                clothDouble.innerHTML = `Double Production: $${prodStats.clothDoubleUpgradeCost}`;
                 clothAmt.innerHTML = `Cloth Chair: ${prodStats.clothAmount} ($${prodStats.clothValue} (x${prodStats.clothMultiplier}))`
                 if (prodStats.clothMultiplier >= 4) {
                     prodStats.clothMultiplier = 4;
                     clothDouble.disabled = true;
+                    localStorage.setItem('clothDoubleDisabled', true);
                     clothDouble.innerHTML = 'Double Production: MAX';
                     break;
                 }
@@ -337,6 +648,7 @@ function upgrade(e) {
         case 'office-prod-time':
             if (totalDollars >= prodStats.officeSpeedUpgradeCost) {
                 totalDollars = (totalDollars - parseInt(prodStats.officeSpeedUpgradeCost.toPrecision(5)));
+                localStorage.setItem('totalDollars', totalDollars);
                 formatMoney();
                 prodStats.officeTime /= 1.3;
                 officeTimer.innerHTML = `${prodStats.officeTime.toPrecision(4)}s`;
@@ -345,9 +657,12 @@ function upgrade(e) {
                 if (prodStats.officeTime <= 0.8) {
                     prodStats.officeTime = 0.8;
                     officeProdTime.disabled = true;
+                    localStorage.setItem('officeProdTimeDisabled', true);
                     officeProdTime.innerHTML = 'Reduce Time: MAX';
                     officeTimer.innerHTML = '0.8s (MAX)';
                 }
+                localStorage.setItem('officeTime', prodStats.officeTime);
+                localStorage.setItem('officeSpeedUpgradeCost', prodStats.officeSpeedUpgradeCost);
                 break;
             } else {
                 renameValue.placeholder = 'NOT ENOUGH MONEY';
@@ -357,10 +672,15 @@ function upgrade(e) {
         case 'office-automate':
             if (totalDollars >= prodStats.officeAutoUpgradeCost) {
                 totalDollars -= prodStats.officeAutoUpgradeCost;
+                localStorage.setItem('totalDollars', totalDollars);
                 formatMoney();
                 officeAuto.disabled = true;
                 officeProdButton.disabled = true;
-                officeAutoInterval = setInterval(officeAutomate, prodStats.officeTime * 1000);
+                officeAutoIntervalBool = true;
+                localStorage.setItem('officeAutoIntervalBool', true);
+                localStorage.setItem('officeAutoDisabled', true);
+                localStorage.setItem('officeProdButtonDisabled', true);
+                automateInit();
                 break;
             } else {
                 renameValue.placeholder = 'NOT ENOUGH MONEY';
@@ -370,14 +690,18 @@ function upgrade(e) {
         case 'office-double':
             if (totalDollars >= prodStats.officeDoubleUpgradeCost) {
                 totalDollars -= prodStats.officeDoubleUpgradeCost;
+                localStorage.setItem('totalDollars', totalDollars);
                 formatMoney();
                 prodStats.officeDoubleUpgradeCost *= 2;
-                officeDouble.innerHTML = `Double Production: $${prodStats.officeDoubleUpgradeCost}`;
                 prodStats.officeMultiplier *= 2;
+                localStorage.setItem('officeDoubleUpgradeCost', prodStats.officeDoubleUpgradeCost);
+                localStorage.setItem('officeMultiplier', prodStats.officeMultiplier);
+                officeDouble.innerHTML = `Double Production: $${prodStats.officeDoubleUpgradeCost}`;
                 officeAmt.innerHTML = `Office Chair: ${prodStats.officeAmount} ($${prodStats.officeValue} (x${prodStats.officeMultiplier}))`
                 if (prodStats.officeMultiplier >= 4) {
                     prodStats.officeMultiplier = 4;
                     officeDouble.disabled = true;
+                    localStorage.setItem('officeDoubleDisabled', true);
                     officeDouble.innerHTML = 'Double Production: MAX';
                     break;
                 }
@@ -390,6 +714,7 @@ function upgrade(e) {
         case 'leather-prod-time':
             if (totalDollars >= prodStats.leatherSpeedUpgradeCost) {
                 totalDollars = (totalDollars - parseInt(prodStats.leatherSpeedUpgradeCost.toPrecision(5)));
+                localStorage.setItem('totalDollars', totalDollars);
                 formatMoney();
                 prodStats.leatherTime /= 1.35;
                 leatherTimer.innerHTML = `${prodStats.leatherTime.toPrecision(4)}s`;
@@ -398,9 +723,12 @@ function upgrade(e) {
                 if (prodStats.leatherTime <= 1) {
                     prodStats.leatherTime = 1;
                     leatherProdTime.disabled = true;
+                    localStorage.setItem('leatherProdTimeDisabled', true);
                     leatherProdTime.innerHTML = 'Reduce Time: MAX';
                     leatherTimer.innerHTML = '1s (MAX)';
                 }
+                localStorage.setItem('leatherTime', prodStats.leatherTime);
+                localStorage.setItem('leatherSpeedUpgradeCost', prodStats.leatherSpeedUpgradeCost);
                 break;
             } else {
                 renameValue.placeholder = 'NOT ENOUGH MONEY';
@@ -410,10 +738,15 @@ function upgrade(e) {
         case 'leather-automate':
             if (totalDollars >= prodStats.leatherAutoUpgradeCost) {
                 totalDollars -= prodStats.leatherAutoUpgradeCost;
+                localStorage.setItem('totalDollars', totalDollars);
                 formatMoney();
                 leatherAuto.disabled = true;
                 leatherProdButton.disabled = true;
-                leatherAutoInterval = setInterval(leatherAutomate, prodStats.leatherTime * 1000);
+                leatherAutoIntervalBool = true;
+                localStorage.setItem('leatherAutoIntervalBool', true);
+                localStorage.setItem('leatherAutoDisabled', true);
+                localStorage.setItem('leatherProdButtonDisabled', true);
+                automateInit();
                 break;
             } else {
                 renameValue.placeholder = 'NOT ENOUGH MONEY';
@@ -423,14 +756,18 @@ function upgrade(e) {
         case 'leather-double':
             if (totalDollars >= prodStats.leatherDoubleUpgradeCost) {
                 totalDollars -= prodStats.leatherDoubleUpgradeCost;
+                localStorage.setItem('totalDollars', totalDollars);
                 formatMoney();
                 prodStats.leatherDoubleUpgradeCost *= 2;
-                leatherDouble.innerHTML = `Double Production: $${prodStats.leatherDoubleUpgradeCost}`;
                 prodStats.leatherMultiplier *= 2;
+                localStorage.setItem('leatherDoubleUpgradeCost', prodStats.leatherDoubleUpgradeCost);
+                localStorage.setItem('leatherMultiplier', prodStats.leatherMultiplier);
+                leatherDouble.innerHTML = `Double Production: $${prodStats.leatherDoubleUpgradeCost}`;
                 leatherAmt.innerHTML = `Leather Chair: ${prodStats.leatherAmount} ($${prodStats.leatherValue} (x${prodStats.leatherMultiplier}))`
                 if (prodStats.leatherMultiplier >= 4) {
                     prodStats.leatherMultiplier = 4;
                     leatherDouble.disabled = true;
+                    localStorage.setItem('leatherDoubleDisabled', true);
                     leatherDouble.innerHTML = 'Double Production: MAX';
                     break;
                 }
@@ -446,10 +783,12 @@ function upgrade(e) {
 function renameFactory() {
     if (!renameValue.value) {
         renameValue.placeholder = 'ERROR: Please enter a name';
+        setTimeout(function () { renameValue.placeholder = '' }, 3000);
         return;
     }
     factoryName.innerHTML = renameValue.value;
-    renameValue.placeholder = '';
+    localStorage.setItem('factoryName', renameValue.value);
+    renameValue.value = '';
 }
 
 function unlock(e) {
@@ -457,6 +796,7 @@ function unlock(e) {
         case 'cloth-prod-timer cloth-unlock':
             if (totalDollars >= prodStats.clothUnlock) {
                 totalDollars -= prodStats.clothUnlock;
+                localStorage.setItem('totalDollars', totalDollars);
                 formatMoney();
                 clothProdButton.disabled = false;
                 clothAuto.disabled = false;
@@ -464,6 +804,12 @@ function unlock(e) {
                 clothDouble.disabled = false;
                 clothAmt.style.opacity = 1;
                 clothUnlock.style.display = 'none';
+                localStorage.setItem('clothProdButtonDisabled', false);
+                localStorage.setItem('clothAutoDisabled', false);
+                localStorage.setItem('clothProdTimeDisabled', false);
+                localStorage.setItem('clothDoubleDisabled', false);
+                localStorage.setItem('clothAmtOpacity', 1);
+                localStorage.setItem('clothUnlockStyleDisplay', 'none');
                 break;
             } else {
                 renameValue.placeholder = 'NOT ENOUGH MONEY';
@@ -473,6 +819,7 @@ function unlock(e) {
         case 'office-prod-timer office-unlock':
             if (totalDollars >= prodStats.officeUnlock) {
                 totalDollars -= prodStats.officeUnlock;
+                localStorage.setItem('totalDollars', totalDollars);
                 formatMoney();
                 officeProdButton.disabled = false;
                 officeAuto.disabled = false;
@@ -480,6 +827,12 @@ function unlock(e) {
                 officeDouble.disabled = false;
                 officeAmt.style.opacity = 1;
                 officeUnlock.style.display = 'none';
+                localStorage.setItem('officeProdButtonDisabled', false);
+                localStorage.setItem('officeAutoDisabled', false);
+                localStorage.setItem('officeProdTimeDisabled', false);
+                localStorage.setItem('officeDoubleDisabled', false);
+                localStorage.setItem('officeAmtOpacity', 1);
+                localStorage.setItem('officeUnlockStyleDisplay', 'none');
                 break;
             } else {
                 renameValue.placeholder = 'NOT ENOUGH MONEY';
@@ -489,6 +842,7 @@ function unlock(e) {
         case 'leather-prod-timer leather-unlock':
             if (totalDollars >= prodStats.leatherUnlock) {
                 totalDollars -= prodStats.leatherUnlock;
+                localStorage.setItem('totalDollars', totalDollars);
                 formatMoney();
                 leatherProdButton.disabled = false;
                 leatherAuto.disabled = false;
@@ -496,6 +850,12 @@ function unlock(e) {
                 leatherDouble.disabled = false;
                 leatherAmt.style.opacity = 1;
                 leatherUnlock.style.display = 'none';
+                localStorage.setItem('leatherProdButtonDisabled', false);
+                localStorage.setItem('leatherAutoDisabled', false);
+                localStorage.setItem('leatherProdTimeDisabled', false);
+                localStorage.setItem('leatherDoubleDisabled', false);
+                localStorage.setItem('leatherAmtOpacity', 1);
+                localStorage.setItem('leatherUnlockStyleDisplay', 'none');
                 break;
             } else {
                 renameValue.placeholder = 'NOT ENOUGH MONEY';
