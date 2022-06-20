@@ -282,13 +282,21 @@ function pageLoad() {
     } else {
         clothProdTime.innerHTML = `Reduce Time: MAX`;
     }
-    woodTimer.innerHTML = `${prodStats.woodTime.toPrecision(4)}s`;
+    if (prodStats.woodTime > 0.05) {
+        woodTimer.innerHTML = `${prodStats.woodTime.toPrecision(4)}s`;
+    } else {
+        woodTimer.innerHTML = `${prodStats.woodTime}s (MAX)`;
+    }
     if (prodStats.woodMultiplier < 4) {
         woodDouble.innerHTML = `Double Production: $${prodStats.woodDoubleUpgradeCost}`;
     } else {
         woodDouble.innerHTML = `Double Production: MAX`;
     }
-    clothTimer.innerHTML = `${prodStats.clothTime.toPrecision(4)}s`;
+    if (prodStats.clothTime > 0.2) {
+        clothTimer.innerHTML = `${prodStats.clothTime.toPrecision(4)}s`;
+    } else {
+        clothTimer.innerHTML = `${prodStats.clothTime}s (MAX)`
+    }
     if (prodStats.clothMultiplier < 4) {
         clothDouble.innerHTML = `Double Production: $${prodStats.clothDoubleUpgradeCost}`;
     } else {
@@ -300,7 +308,11 @@ function pageLoad() {
     } else {
         officeProdTime.innerHTML = `Reduce Time: MAX`;
     }
-    officeTimer.innerHTML = `${prodStats.officeTime.toPrecision(4)}s`;
+    if (prodStats.officeTime > 0.8) {
+        officeTimer.innerHTML = `${prodStats.officeTime.toPrecision(4)}s`;
+    } else {
+        officeTimer.innerHTML = `${prodStats.officeTime}s (MAX)`;
+    }
     if (prodStats.officeMultiplier < 4) {
         officeDouble.innerHTML = `Double Production: $${prodStats.officeDoubleUpgradeCost}`;
     } else {
@@ -312,7 +324,11 @@ function pageLoad() {
     } else {
         leatherProdTime.innerHTML = `Reduce Time: MAX`;
     }
-    leatherTimer.innerHTML = `${prodStats.leatherTime.toPrecision(4)}s`;
+    if (prodStats.leatherTime > 1) {
+        leatherTimer.innerHTML = `${prodStats.leatherTime.toPrecision(4)}s`;
+    } else {
+        leatherTimer.innerHTML = `${prodStats.leatherTime}s (MAX)`;
+    }
     if (prodStats.leatherMultiplier < 4) {
         leatherDouble.innerHTML = `Double Production: $${prodStats.leatherDoubleUpgradeCost}`;
     } else {
