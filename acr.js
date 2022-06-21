@@ -34,6 +34,7 @@ const leatherDouble = document.querySelector('.leather-double');
 const settingsModal = document.querySelector('.modal');
 const settingsButton = document.querySelector('.settings');
 const closeSettings = document.querySelector('.close');
+const closePrestige = document.querySelector('.deny');
 const red1 = document.getElementById('red-header-background-slider');
 const green1 = document.getElementById('green-header-background-slider');
 const blue1 = document.getElementById('blue-header-background-slider');
@@ -47,9 +48,13 @@ const red4 = document.getElementById('red-factory-text-slider');
 const green4 = document.getElementById('green-factory-text-slider');
 const blue4 = document.getElementById('blue-factory-text-slider');
 const sliders = document.querySelectorAll('.slider');
+const prestigeButton = document.querySelector('.prestige');
+const prestigeConfirmButton = document.querySelector('.confirm');
+const prestigeWarning = document.querySelector('.prestige-warning');
 let totalDollars = localStorage.getItem('totalDollars');
 let totalDollarsArray = JSON.stringify(totalDollars).split('');
 let totalChairs = 0;
+let prestigeBonus = localStorage.getItem('prestigeBonus');
 
 const prodStats = {
     woodTime: 3.25,
@@ -86,7 +91,10 @@ const prodStats = {
 }
 
 function init() {
-    switch (true) { //init all needed values
+    switch (true) {
+        case !localStorage.getItem('prestigeBonus'):
+            localStorage.setItem('prestigeBonus', 1);
+            console.log('initializing-prestigeBonus');
         case !localStorage.getItem('totalDollars'):
             localStorage.setItem('totalDollars', 0);
             console.log('initializing-totalDollars');
@@ -261,6 +269,9 @@ function init() {
         case !localStorage.getItem('bFBColor'):
             localStorage.setItem('bFBColor', 225);
             console.log('initializing-bFBColor');
+        case !localStorage.getItem('prestigeOpenDisabled'):
+            localStorage.setItem('prestigeOpenDisabled', true);
+            console.log('initializing-prestigeOpenDisabled');
     }
     totalDollars = JSON.parse(localStorage.getItem('totalDollars'));
     formatMoney();
@@ -326,6 +337,7 @@ function init() {
     red3.value = JSON.parse(localStorage.getItem('rFBColor'));
     green3.value = JSON.parse(localStorage.getItem('gFBColor'));
     blue3.value = JSON.parse(localStorage.getItem('bFBColor'));
+    prestigeButton.disabled = JSON.parse(localStorage.getItem('prestigeOpenDisabled'));
     pageLoad();
 }
 init();
@@ -433,7 +445,7 @@ function automateInit() {
     }
 }
 
-function formatMoney() { //no changes needed for localStorage
+function formatMoney() {
     let totalDollarsArray = JSON.stringify(totalDollars).split('');
     switch (true) {
         case totalDollarsArray.length > 10:
@@ -481,7 +493,7 @@ function produce(e) {
             setTimeout(() => {
                 prodStats.woodAmount += (1 * prodStats.woodMultiplier);
                 totalChairs += (1 * prodStats.woodMultiplier);
-                totalDollars += (prodStats.woodValue * prodStats.woodMultiplier);
+                totalDollars += (prodStats.woodValue * prodStats.woodMultiplier * prestigeBonus);
                 localStorage.setItem('woodAmount', prodStats.woodAmount);
                 localStorage.setItem('totalDollars', totalDollars);
                 localStorage.setItem('totalChairs', totalChairs);
@@ -496,7 +508,7 @@ function produce(e) {
             setTimeout(() => {
                 prodStats.clothAmount += (1 * prodStats.clothMultiplier);
                 totalChairs += (1 * prodStats.clothMultiplier);
-                totalDollars += (prodStats.clothValue * prodStats.clothMultiplier);
+                totalDollars += (prodStats.clothValue * prodStats.clothMultiplier * prestigeBonus);
                 localStorage.setItem('clothAmount', prodStats.clothAmount);
                 localStorage.setItem('totalDollars', totalDollars);
                 localStorage.setItem('totalChairs', totalChairs);
@@ -511,7 +523,7 @@ function produce(e) {
             setTimeout(() => {
                 prodStats.officeAmount += (1 * prodStats.officeMultiplier);
                 totalChairs += (1 * prodStats.officeMultiplier);
-                totalDollars += (prodStats.officeValue * prodStats.officeMultiplier);
+                totalDollars += (prodStats.officeValue * prodStats.officeMultiplier * prestigeBonus);
                 localStorage.setItem('officeAmount', prodStats.officeAmount);
                 localStorage.setItem('totalDollars', totalDollars);
                 localStorage.setItem('totalChairs', totalChairs);
@@ -526,7 +538,7 @@ function produce(e) {
             setTimeout(() => {
                 prodStats.leatherAmount += (1 * prodStats.leatherMultiplier);
                 totalChairs += (1 * prodStats.leatherMultiplier);
-                totalDollars += (prodStats.leatherValue * prodStats.leatherMultiplier);
+                totalDollars += (prodStats.leatherValue * prodStats.leatherMultiplier * prestigeBonus);
                 localStorage.setItem('leatherAmount', prodStats.leatherAmount);
                 localStorage.setItem('totalDollars', totalDollars);
                 localStorage.setItem('totalChairs', totalChairs);
@@ -537,19 +549,29 @@ function produce(e) {
             }, (prodStats.leatherTime) * 1000);
             break;
     }
+    checkForPrestige();
+}
+
+function checkForPrestige() {
+    if (totalChairs >= 10000) {
+        prestigeButton.disabled = false;
+        localStorage.setItem('prestigeOpenDisabled', false);
+    }
+    return;
 }
 
 function woodAutomate() {
     clearInterval(woodAutoInterval);
     prodStats.woodAmount += (1 * prodStats.woodMultiplier);
     totalChairs += (1 * prodStats.woodMultiplier);
-    totalDollars += (prodStats.woodValue * prodStats.woodMultiplier);
+    totalDollars += (prodStats.woodValue * prodStats.woodMultiplier * prestigeBonus);
     localStorage.setItem('woodAmount', prodStats.woodAmount);
     localStorage.setItem('totalDollars', totalDollars);
     localStorage.setItem('totalChairs', totalChairs);
     formatMoney();
     chairs.innerHTML = `You have produced: ${totalChairs} chairs`;
     woodAmt.innerHTML = `Wooden Chair: ${prodStats.woodAmount} ($${prodStats.woodValue} (x${prodStats.woodMultiplier}))`;
+    checkForPrestige();
     woodAutoInterval = setInterval(woodAutomate, prodStats.woodTime * 1000);
 }
 
@@ -557,13 +579,14 @@ function clothAutomate() {
     clearInterval(clothAutoInterval);
     prodStats.clothAmount += (1 * prodStats.clothMultiplier);
     totalChairs += (1 * prodStats.clothMultiplier);
-    totalDollars += (prodStats.clothValue * prodStats.clothMultiplier);
+    totalDollars += (prodStats.clothValue * prodStats.clothMultiplier * prestigeBonus);
     localStorage.setItem('clothAmount', prodStats.clothAmount);
     localStorage.setItem('totalDollars', totalDollars);
     localStorage.setItem('totalChairs', totalChairs);
     formatMoney();
     chairs.innerHTML = `You have produced: ${totalChairs} chairs`;
     clothAmt.innerHTML = `Cloth Chair: ${prodStats.clothAmount} ($${prodStats.clothValue} (x${prodStats.clothMultiplier}))`;
+    checkForPrestige();
     clothAutoInterval = setInterval(clothAutomate, prodStats.clothTime * 1000);
 }
 
@@ -571,13 +594,14 @@ function officeAutomate() {
     clearInterval(officeAutoInterval);
     prodStats.officeAmount += (1 * prodStats.officeMultiplier);
     totalChairs += (1 * prodStats.officeMultiplier);
-    totalDollars += (prodStats.officeValue * prodStats.officeMultiplier);
+    totalDollars += (prodStats.officeValue * prodStats.officeMultiplier * prestigeBonus);
     localStorage.setItem('officeAmount', prodStats.officeAmount);
     localStorage.setItem('totalDollars', totalDollars);
     localStorage.setItem('totalChairs', totalChairs);
     formatMoney();
     chairs.innerHTML = `You have produced: ${totalChairs} chairs`;
     officeAmt.innerHTML = `Office Chair: ${prodStats.officeAmount} ($${prodStats.officeValue} (x${prodStats.officeMultiplier}))`;
+    checkForPrestige();
     officeAutoInterval = setInterval(officeAutomate, prodStats.officeTime * 1000);
 }
 
@@ -585,13 +609,14 @@ function leatherAutomate() {
     clearInterval(leatherAutoInterval);
     prodStats.leatherAmount += (1 * prodStats.leatherMultiplier);
     totalChairs += (1 * prodStats.leatherMultiplier);
-    totalDollars += (prodStats.leatherValue * prodStats.leatherMultiplier);
+    totalDollars += (prodStats.leatherValue * prodStats.leatherMultiplier * prestigeBonus);
     localStorage.setItem('leatherAmount', prodStats.leatherAmount);
     localStorage.setItem('totalDollars', totalDollars);
     localStorage.setItem('totalChairs', totalChairs);
     formatMoney();
     chairs.innerHTML = `You have produced: ${totalChairs} chairs`;
     leatherAmt.innerHTML = `Leather Chair: ${prodStats.leatherAmount} ($${prodStats.leatherValue} (x${prodStats.leatherMultiplier}))`;
+    checkForPrestige();
     leatherAutoInterval = setInterval(leatherAutomate, prodStats.leatherTime * 1000);
 }
 
@@ -1016,9 +1041,30 @@ function adjustColor() {
     }
 }
 
+function prestige() {
+    let prestigeBonus = localStorage.getItem('prestigeBonus') * 1.2;
+    console.log(prestigeBonus);
+    localStorage.clear();
+    location.reload();
+    localStorage.setItem('prestigeBonus', prestigeBonus);
+    console.log(localStorage.getItem('prestigeBonus'));
+}
+
+function prestigeOpen() {
+    prestigeWarning.style.display = 'block';
+}
+
+function closeConfirmation() {
+    prestigeWarning.style.display = 'none';
+}
+
 for (let i = 0; i < sliders.length; i++) {
     sliders[i].addEventListener('change', adjustColor);
 }
+
+prestigeConfirmButton.addEventListener('click', prestige);
+closePrestige.addEventListener('click', closeConfirmation);
+prestigeButton.addEventListener('click', prestigeOpen);
 settingsButton.addEventListener('click', settings);
 closeSettings.addEventListener('click', closeSettingsModal);
 woodProdTime.addEventListener('click', upgrade);
