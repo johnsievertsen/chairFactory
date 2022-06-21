@@ -1,6 +1,7 @@
 const renameButton = document.querySelector('.rename');
 const renameValue = document.querySelector('.name');
 const factoryName = document.querySelector('.factory-name');
+const factory = document.querySelector('.factory');
 const woodProdButton = document.querySelector('.wood-produce');
 const woodAmt = document.querySelector('.wood');
 const clothProdButton = document.querySelector('.cloth-produce');
@@ -30,6 +31,22 @@ const leatherAuto = document.querySelector('.leather-automate');
 const leatherTimer = document.querySelector('.leather-prod-timer');
 const leatherUnlock = document.querySelector('.leather-unlock');
 const leatherDouble = document.querySelector('.leather-double');
+const settingsModal = document.querySelector('.modal');
+const settingsButton = document.querySelector('.settings');
+const closeSettings = document.querySelector('.close');
+const red1 = document.getElementById('red-header-background-slider');
+const green1 = document.getElementById('green-header-background-slider');
+const blue1 = document.getElementById('blue-header-background-slider');
+const red2 = document.getElementById('red-header-text-slider');
+const green2 = document.getElementById('green-header-text-slider');
+const blue2 = document.getElementById('blue-header-text-slider');
+const red3 = document.getElementById('red-factory-background-slider');
+const green3 = document.getElementById('green-factory-background-slider');
+const blue3 = document.getElementById('blue-factory-background-slider');
+const red4 = document.getElementById('red-factory-text-slider');
+const green4 = document.getElementById('green-factory-text-slider');
+const blue4 = document.getElementById('blue-factory-text-slider');
+const sliders = document.querySelectorAll('.slider');
 let totalDollars = localStorage.getItem('totalDollars');
 let totalDollarsArray = JSON.stringify(totalDollars).split('');
 let totalChairs = 0;
@@ -217,6 +234,33 @@ function init() {
         case !localStorage.getItem('leatherAmtOpacity'):
             localStorage.setItem('leatherAmtOpacity', 0.5);
             console.log('initializing-leatherAmtOpacity');
+        case !localStorage.getItem('rHBColor'):
+            localStorage.setItem('rHBColor', 20);
+            console.log('initializing-rHBColor');
+        case !localStorage.getItem('gHBColor'):
+            localStorage.setItem('gHBColor', 45);
+            console.log('initializing-gHBColor');
+        case !localStorage.getItem('bHBColor'):
+            localStorage.setItem('bHBColor', 50);
+            console.log('initializing-bHBColor');
+        case !localStorage.getItem('rHTColor'):
+            localStorage.setItem('rHTColor', 75);
+            console.log('initializing-rHTColor');
+        case !localStorage.getItem('gHTColor'):
+            localStorage.setItem('gHTColor', 240);
+            console.log('initializing-gHTColor');
+        case !localStorage.getItem('bHTColor'):
+            localStorage.setItem('bHTColor', 255);
+            console.log('initializing-bHTColor');
+        case !localStorage.getItem('rFBColor'):
+            localStorage.setItem('rFBColor', 107);
+            console.log('initializing-rFBColor');
+        case !localStorage.getItem('gFBColor'):
+            localStorage.setItem('gFBColor', 134);
+            console.log('initializing-gFBColor');
+        case !localStorage.getItem('bFBColor'):
+            localStorage.setItem('bFBColor', 225);
+            console.log('initializing-bFBColor');
     }
     totalDollars = JSON.parse(localStorage.getItem('totalDollars'));
     formatMoney();
@@ -264,6 +308,24 @@ function init() {
     clothAmt.style.opacity = JSON.parse(localStorage.getItem('clothAmtOpacity'));
     officeAmt.style.opacity = JSON.parse(localStorage.getItem('officeAmtOpacity'));
     leatherAmt.style.opacity = JSON.parse(localStorage.getItem('leatherAmtOpacity'));
+    rHBColor = JSON.parse(localStorage.getItem('rHBColor'));
+    gHBColor = JSON.parse(localStorage.getItem('gHBColor'));
+    bHBColor = JSON.parse(localStorage.getItem('bHBColor'));
+    red1.value = JSON.parse(localStorage.getItem('rHBColor'));
+    green1.value = JSON.parse(localStorage.getItem('gHBColor'));
+    blue1.value = JSON.parse(localStorage.getItem('bHBColor'));
+    rHTColor = JSON.parse(localStorage.getItem('rHTColor'));
+    gHTColor = JSON.parse(localStorage.getItem('gHTColor'));
+    bHTColor = JSON.parse(localStorage.getItem('bHTColor'));
+    red2.value = JSON.parse(localStorage.getItem('rHTColor'));
+    green2.value = JSON.parse(localStorage.getItem('gHTColor'));
+    blue2.value = JSON.parse(localStorage.getItem('bHTColor'));
+    rFBColor = JSON.parse(localStorage.getItem('rFBColor'));
+    gFBColor = JSON.parse(localStorage.getItem('gFBColor'));
+    bFBColor = JSON.parse(localStorage.getItem('bFBColor'));
+    red3.value = JSON.parse(localStorage.getItem('rFBColor'));
+    green3.value = JSON.parse(localStorage.getItem('gFBColor'));
+    blue3.value = JSON.parse(localStorage.getItem('bFBColor'));
     pageLoad();
 }
 init();
@@ -334,6 +396,12 @@ function pageLoad() {
     } else {
         leatherDouble.innerHTML = `Double Production: MAX`;
     }
+    document.querySelector('.heading').style.backgroundColor = `rgb(${rHBColor}, ${gHBColor}, ${bHBColor})`;
+    document.querySelector('.money').style.color = `rgb(${rHTColor}, ${gHTColor}, ${bHTColor})`;
+    document.querySelector('.chairs').style.color = `rgb(${rHTColor}, ${gHTColor}, ${bHTColor})`;
+    document.querySelector('.factory-name').style.color = `rgb(${rHTColor}, ${gHTColor}, ${bHTColor})`;
+    document.documentElement.style.backgroundColor = `rgb(${rFBColor}, ${gFBColor}, ${bFBColor})`;
+    factory.style.backgroundColor = `rgb(${rFBColor}, ${gFBColor}, ${bFBColor})`;
 }
 
 let woodAutoIntervalBool = JSON.parse(localStorage.getItem('woodAutoIntervalBool'));
@@ -881,6 +949,78 @@ function unlock(e) {
     }
 }
 
+function settings() {
+    settingsModal.style.display = 'block';
+}
+
+function closeSettingsModal() {
+    settingsModal.style.display = 'none';
+}
+
+function adjustColor() {
+    switch (this.id) {
+        case 'red-header-background-slider':
+            rHBColor = this.value;
+            localStorage.setItem('rHBColor', rHBColor);
+            document.querySelector('.heading').style.backgroundColor = `rgb(${rHBColor}, ${gHBColor}, ${bHBColor})`;
+            break;
+        case 'green-header-background-slider':
+            gHBColor = this.value;
+            localStorage.setItem('gHBColor', gHBColor);
+            document.querySelector('.heading').style.backgroundColor = `rgb(${rHBColor}, ${gHBColor}, ${bHBColor})`;
+            break;
+        case 'blue-header-background-slider':
+            bHBColor = this.value;
+            localStorage.setItem('bHBColor', bHBColor);
+            document.querySelector('.heading').style.backgroundColor = `rgb(${rHBColor}, ${gHBColor}, ${bHBColor})`;
+            break;
+        case 'red-header-text-slider':
+            rHTColor = this.value;
+            localStorage.setItem('rHTColor', rHTColor);
+            document.querySelector('.money').style.color = `rgb(${rHTColor}, ${gHTColor}, ${bHTColor})`;
+            document.querySelector('.chairs').style.color = `rgb(${rHTColor}, ${gHTColor}, ${bHTColor})`;
+            document.querySelector('.factory-name').style.color = `rgb(${rHTColor}, ${gHTColor}, ${bHTColor})`;
+            break;
+        case 'green-header-text-slider':
+            gHTColor = this.value;
+            localStorage.setItem('gHTColor', gHTColor);
+            document.querySelector('.money').style.color = `rgb(${rHTColor}, ${gHTColor}, ${bHTColor})`;
+            document.querySelector('.chairs').style.color = `rgb(${rHTColor}, ${gHTColor}, ${bHTColor})`;
+            document.querySelector('.factory-name').style.color = `rgb(${rHTColor}, ${gHTColor}, ${bHTColor})`;
+            break;
+        case 'blue-header-text-slider':
+            bHTColor = this.value;
+            localStorage.setItem('bHTColor', bHTColor);
+            document.querySelector('.money').style.color = `rgb(${rHTColor}, ${gHTColor}, ${bHTColor})`;
+            document.querySelector('.chairs').style.color = `rgb(${rHTColor}, ${gHTColor}, ${bHTColor})`;
+            document.querySelector('.factory-name').style.color = `rgb(${rHTColor}, ${gHTColor}, ${bHTColor})`;
+            break;
+        case 'red-factory-background-slider':
+            rFBColor = this.value;
+            localStorage.setItem('rFBColor', rFBColor);
+            document.documentElement.style.backgroundColor = `rgb(${rFBColor}, ${gFBColor}, ${bFBColor})`;
+            factory.style.backgroundColor = `rgb(${rFBColor}, ${gFBColor}, ${bFBColor})`;
+            break;
+        case 'green-factory-background-slider':
+            gFBColor = this.value;
+            localStorage.setItem('gFBColor', gFBColor);
+            document.documentElement.style.backgroundColor = `rgb(${rFBColor}, ${gFBColor}, ${bFBColor})`;
+            factory.style.backgroundColor = `rgb(${rFBColor}, ${gFBColor}, ${bFBColor})`;
+            break;
+        case 'blue-factory-background-slider':
+            bFBColor = this.value;
+            localStorage.setItem('bFBColor', bFBColor);
+            document.documentElement.style.backgroundColor = `rgb(${rFBColor}, ${gFBColor}, ${bFBColor})`;
+            factory.style.backgroundColor = `rgb(${rFBColor}, ${gFBColor}, ${bFBColor})`;
+            break;
+    }
+}
+
+for (let i = 0; i < sliders.length; i++) {
+    sliders[i].addEventListener('change', adjustColor);
+}
+settingsButton.addEventListener('click', settings);
+closeSettings.addEventListener('click', closeSettingsModal);
 woodProdTime.addEventListener('click', upgrade);
 woodAuto.addEventListener('click', upgrade);
 clothProdTime.addEventListener('click', upgrade);

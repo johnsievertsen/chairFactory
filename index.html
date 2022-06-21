@@ -15,6 +15,7 @@
         <h1 class="factory-name">Your Chair Factory</h1>
         <button type="button" class="rename">Rename Factory</button>
         <input type="text" type="submit" class="name"></input>
+        <button type="button" class="settings">Settings</button>
         <h5 class="money">You have: $0</h5>
         <h5 class="chairs">You have produced: 0 chairs</h5>
         <p class="upgrade-label">Upgrades:</p>
@@ -54,6 +55,32 @@
             <button type="button" class="leather-automate">Automate Production: $17832</button>
             <button type="button" class="leather-double">Double Production: $34102</button>
             <p class="seperator">------------------------------------</p>
+        </div>
+    </div>
+    <div class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p style="font-weight: bold;">Settings:</p>
+            <br>
+            <span>Header Background Color: </span>
+            <br>
+            <input type="range" class="slider" id="red-header-background-slider" min="0" max="255" value="">R</input>
+            <input type="range" class="slider" id="green-header-background-slider" min="0" max="255" value="">G</input>
+            <input type="range" class="slider" id="blue-header-background-slider" min="0" max="255" value="">B</input>
+            <br>
+            <br>
+            <span>Header Text Color:</span>
+            <br>
+            <input type="range" class="slider" id="red-header-text-slider" min="0" max="255" value="">R</input>
+            <input type="range" class="slider" id="green-header-text-slider" min="0" max="255" value="">G</input>
+            <input type="range" class="slider" id="blue-header-text-slider" min="0" max="255" value="">B</input>
+            <br>
+            <br>
+            <span>Factory Background Color: </span>
+            <br>
+            <input type="range" class="slider" id="red-factory-background-slider" min="0" max="255" value="">R</input>
+            <input type="range" class="slider" id="green-factory-background-slider" min="0" max="255" value="">G</input>
+            <input type="range" class="slider" id="blue-factory-background-slider" min="0" max="255" value="">B</input>
         </div>
     </div>
     <script type="text/javascript" src="acr.js"></script>
