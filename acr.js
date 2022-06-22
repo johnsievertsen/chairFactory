@@ -553,7 +553,7 @@ function produce(e) {
 }
 
 function checkForPrestige() {
-    if (totalChairs >= 10000) {
+    if (totalChairs >= 100000) {
         prestigeButton.disabled = false;
         localStorage.setItem('prestigeOpenDisabled', false);
     }
@@ -1042,7 +1042,7 @@ function adjustColor() {
 }
 
 function prestige() {
-    let prestigeBonus = localStorage.getItem('prestigeBonus') * (1 + (totalChairs / 100000));
+    let prestigeBonus = localStorage.getItem('prestigeBonus') * (1 + (totalChairs / 1000000));
     console.log(prestigeBonus);
     localStorage.clear();
     location.reload();
