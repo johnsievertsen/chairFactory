@@ -493,7 +493,7 @@ function produce(e) {
             setTimeout(() => {
                 prodStats.woodAmount += (1 * prodStats.woodMultiplier);
                 totalChairs += (1 * prodStats.woodMultiplier);
-                totalDollars += JSON.parse((prodStats.woodValue * prodStats.woodMultiplier * prestigeBonus).toPrecision(4));
+                totalDollars += parseInt((prodStats.woodValue * prodStats.woodMultiplier * prestigeBonus).toFixed(2));
                 localStorage.setItem('woodAmount', prodStats.woodAmount);
                 localStorage.setItem('totalDollars', totalDollars);
                 localStorage.setItem('totalChairs', totalChairs);
@@ -508,7 +508,7 @@ function produce(e) {
             setTimeout(() => {
                 prodStats.clothAmount += (1 * prodStats.clothMultiplier);
                 totalChairs += (1 * prodStats.clothMultiplier);
-                totalDollars += JSON.parse((prodStats.clothValue * prodStats.clothMultiplier * prestigeBonus).toPrecision(4));
+                totalDollars += parseInt((prodStats.clothValue * prodStats.clothMultiplier * prestigeBonus).toFixed(2));
                 localStorage.setItem('clothAmount', prodStats.clothAmount);
                 localStorage.setItem('totalDollars', totalDollars);
                 localStorage.setItem('totalChairs', totalChairs);
@@ -523,7 +523,7 @@ function produce(e) {
             setTimeout(() => {
                 prodStats.officeAmount += (1 * prodStats.officeMultiplier);
                 totalChairs += (1 * prodStats.officeMultiplier);
-                totalDollars += JSON.parse((prodStats.officeValue * prodStats.officeMultiplier * prestigeBonus).toPrecision(4));
+                totalDollars += parseInt((prodStats.officeValue * prodStats.officeMultiplier * prestigeBonus).toFixed(2));
                 localStorage.setItem('officeAmount', prodStats.officeAmount);
                 localStorage.setItem('totalDollars', totalDollars);
                 localStorage.setItem('totalChairs', totalChairs);
@@ -538,7 +538,7 @@ function produce(e) {
             setTimeout(() => {
                 prodStats.leatherAmount += (1 * prodStats.leatherMultiplier);
                 totalChairs += (1 * prodStats.leatherMultiplier);
-                totalDollars += JSON.parse((prodStats.leatherValue * prodStats.leatherMultiplier * prestigeBonus).toPrecision(4));
+                totalDollars += parseInt((prodStats.leatherValue * prodStats.leatherMultiplier * prestigeBonus).toFixed(2));
                 localStorage.setItem('leatherAmount', prodStats.leatherAmount);
                 localStorage.setItem('totalDollars', totalDollars);
                 localStorage.setItem('totalChairs', totalChairs);
@@ -564,7 +564,7 @@ function woodAutomate() {
     clearInterval(woodAutoInterval);
     prodStats.woodAmount += (1 * prodStats.woodMultiplier);
     totalChairs += (1 * prodStats.woodMultiplier);
-    totalDollars += JSON.parse((prodStats.woodValue * prodStats.woodMultiplier * prestigeBonus).toPrecision(4));
+    totalDollars += parseInt((prodStats.woodValue * prodStats.woodMultiplier * prestigeBonus).toFixed(2));
     localStorage.setItem('woodAmount', prodStats.woodAmount);
     localStorage.setItem('totalDollars', totalDollars);
     localStorage.setItem('totalChairs', totalChairs);
@@ -579,7 +579,7 @@ function clothAutomate() {
     clearInterval(clothAutoInterval);
     prodStats.clothAmount += (1 * prodStats.clothMultiplier);
     totalChairs += (1 * prodStats.clothMultiplier);
-    totalDollars += JSON.parse((prodStats.clothValue * prodStats.clothMultiplier * prestigeBonus).toPrecision(4));
+    totalDollars += parseInt((prodStats.clothValue * prodStats.clothMultiplier * prestigeBonus).toFixed(2));
     localStorage.setItem('clothAmount', prodStats.clothAmount);
     localStorage.setItem('totalDollars', totalDollars);
     localStorage.setItem('totalChairs', totalChairs);
@@ -594,7 +594,7 @@ function officeAutomate() {
     clearInterval(officeAutoInterval);
     prodStats.officeAmount += (1 * prodStats.officeMultiplier);
     totalChairs += (1 * prodStats.officeMultiplier);
-    totalDollars += JSON.parse((prodStats.officeValue * prodStats.officeMultiplier * prestigeBonus).toPrecision(4));
+    totalDollars += parseInt((prodStats.officeValue * prodStats.officeMultiplier * prestigeBonus).toFixed(2));
     localStorage.setItem('officeAmount', prodStats.officeAmount);
     localStorage.setItem('totalDollars', totalDollars);
     localStorage.setItem('totalChairs', totalChairs);
@@ -609,7 +609,7 @@ function leatherAutomate() {
     clearInterval(leatherAutoInterval);
     prodStats.leatherAmount += (1 * prodStats.leatherMultiplier);
     totalChairs += (1 * prodStats.leatherMultiplier);
-    totalDollars += JSON.parse((prodStats.leatherValue * prodStats.leatherMultiplier * prestigeBonus).toPrecision(4));
+    totalDollars += parseInt((prodStats.leatherValue * prodStats.leatherMultiplier * prestigeBonus).toFixed(2));
     localStorage.setItem('leatherAmount', prodStats.leatherAmount);
     localStorage.setItem('totalDollars', totalDollars);
     localStorage.setItem('totalChairs', totalChairs);
