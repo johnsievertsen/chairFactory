@@ -1042,7 +1042,7 @@ function adjustColor() {
 }
 
 function prestige() {
-    let prestigeBonus = localStorage.getItem('prestigeBonus') * 1.2;
+    let prestigeBonus = localStorage.getItem('prestigeBonus') * (1 + (totalChairs / 100000));
     console.log(prestigeBonus);
     localStorage.clear();
     location.reload();
