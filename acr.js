@@ -451,33 +451,33 @@ function formatMoney() {
         case totalDollarsArray.length > 7:
             totalDollars = Math.ceil(totalDollars);
             localStorage.setItem('totalDollars', totalDollars);
-        case totalDollars >= 0 && totalDollars <= 999:
+        case totalDollars >= 0 && totalDollars < 1000:
             money.innerHTML = `You have: $${totalDollars}`;
             break;
-        case totalDollars >= 1000 && totalDollars <= 9999:
+        case totalDollars > 1000 && totalDollars < 10000:
             totalDollarsArray = JSON.stringify(totalDollars).split('');
             totalDollarsArray.splice(1, 0, ',');
             money.innerHTML = `You have: $${totalDollarsArray.join('')}`;
             break;
-        case totalDollars >= 10000 && totalDollars <= 99999:
+        case totalDollars >= 10000 && totalDollars < 100000:
             totalDollarsArray = JSON.stringify(totalDollars).split('');
             totalDollarsArray.splice(2, 0, ',');
             money.innerHTML = `You have: $${totalDollarsArray.join('')}`;
             break;
-        case totalDollars >= 100000 && totalDollars <= 999999:
+        case totalDollars >= 100000 && totalDollars < 1000000:
             totalDollarsArray = JSON.stringify(totalDollars).split('');
             totalDollarsArray.splice(3, 0, ',');
             money.innerHTML = `You have: $${totalDollarsArray.join('')}`;
             break;
-        case totalDollars >= 1000000 && totalDollars <= 9999999:
+        case totalDollars >= 1000000 && totalDollars < 10000000:
             totalDollarsArray = JSON.stringify(totalDollars).split('');
             money.innerHTML = `You have: $${totalDollarsArray[0]}.${totalDollarsArray[1] + '' + totalDollarsArray[2]}M`;
             break;
-        case totalDollars >= 10000000 && totalDollars <= 99999999:
+        case totalDollars >= 10000000 && totalDollars < 100000000:
             totalDollarsArray = JSON.stringify(totalDollars).split('');
             money.innerHTML = `You have: $${totalDollarsArray[0] + '' + totalDollarsArray[1]}.${totalDollarsArray[2] + '' + totalDollarsArray[3]}M`;
             break;
-        case totalDollars >= 100000000 && totalDollars <= 999999999:
+        case totalDollars >= 100000000 && totalDollars < 1000000000:
             totalDollarsArray = JSON.stringify(totalDollars).split('');
             money.innerHTML = `You have: $${totalDollarsArray[0] + '' + totalDollarsArray[1] + '' + totalDollarsArray[2]}.${totalDollarsArray[3] + '' + totalDollarsArray[4]}M`;
             break;
