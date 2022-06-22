@@ -454,7 +454,7 @@ function formatMoney() {
         case totalDollars >= 0 && totalDollars < 1000:
             money.innerHTML = `You have: $${totalDollars}`;
             break;
-        case totalDollars > 1000 && totalDollars < 10000:
+        case totalDollars >= 1000 && totalDollars < 10000:
             totalDollarsArray = JSON.stringify(totalDollars).split('');
             totalDollarsArray.splice(1, 0, ',');
             money.innerHTML = `You have: $${totalDollarsArray.join('')}`;
