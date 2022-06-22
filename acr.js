@@ -448,9 +448,9 @@ function automateInit() {
 function formatMoney() {
     let totalDollarsArray = JSON.stringify(totalDollars).split('');
     switch (true) {
-        case totalDollarsArray.length > 7:
-            totalDollars = Math.ceil(totalDollars);
-            localStorage.setItem('totalDollars', totalDollars);
+        // case totalDollarsArray.length > 7:
+        //     totalDollars = Math.ceil(totalDollars);
+        //     localStorage.setItem('totalDollars', totalDollars);
         case totalDollars >= 0 && totalDollars < 1000:
             money.innerHTML = `You have: $${totalDollars}`;
             break;
