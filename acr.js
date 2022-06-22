@@ -675,8 +675,15 @@ function upgrade(e) {
                 localStorage.setItem('woodMultiplier', prodStats.woodMultiplier);
                 woodDouble.innerHTML = `Double Production: $${prodStats.woodDoubleUpgradeCost}`;
                 woodAmt.innerHTML = `Wooden Chair: ${prodStats.woodAmount} ($${prodStats.woodValue} (x${prodStats.woodMultiplier}))`
-                if (prodStats.woodMultiplier >= 4) {
+                if (prodStats.woodMultiplier >= 4 && prestigeBonus < 2) {
                     prodStats.woodMultiplier = 4;
+                    woodDouble.disabled = true;
+                    localStorage.setItem('woodDoubleDisabled', true);
+                    woodDouble.innerHTML = 'Double Production: MAX';
+                    break;
+                }
+                if (prodStats.woodMultiplier >= 16) {
+                    prodStats.woodMultiplier = 16;
                     woodDouble.disabled = true;
                     localStorage.setItem('woodDoubleDisabled', true);
                     woodDouble.innerHTML = 'Double Production: MAX';
@@ -741,8 +748,15 @@ function upgrade(e) {
                 localStorage.setItem('clothMultiplier', prodStats.clothMultiplier);
                 clothDouble.innerHTML = `Double Production: $${prodStats.clothDoubleUpgradeCost}`;
                 clothAmt.innerHTML = `Cloth Chair: ${prodStats.clothAmount} ($${prodStats.clothValue} (x${prodStats.clothMultiplier}))`
-                if (prodStats.clothMultiplier >= 4) {
+                if (prodStats.clothMultiplier >= 4 && prestigeBonus < 2) {
                     prodStats.clothMultiplier = 4;
+                    clothDouble.disabled = true;
+                    localStorage.setItem('clothDoubleDisabled', true);
+                    clothDouble.innerHTML = 'Double Production: MAX';
+                    break;
+                }
+                if (prodStats.clothMultiplier >= 16) {
+                    prodStats.clothMultiplier = 16;
                     clothDouble.disabled = true;
                     localStorage.setItem('clothDoubleDisabled', true);
                     clothDouble.innerHTML = 'Double Production: MAX';
@@ -763,12 +777,12 @@ function upgrade(e) {
                 officeTimer.innerHTML = `${prodStats.officeTime.toPrecision(4)}s`;
                 prodStats.officeSpeedUpgradeCost = parseInt((prodStats.officeSpeedUpgradeCost * 1.5).toPrecision(9));
                 officeProdTime.innerHTML = `Reduce Time: $${prodStats.officeSpeedUpgradeCost}`;
-                if (prodStats.officeTime <= 0.8) {
-                    prodStats.officeTime = 0.8;
+                if (prodStats.officeTime <= 0.5) {
+                    prodStats.officeTime = 0.5;
                     officeProdTime.disabled = true;
                     localStorage.setItem('officeProdTimeDisabled', true);
                     officeProdTime.innerHTML = 'Reduce Time: MAX';
-                    officeTimer.innerHTML = '0.8s (MAX)';
+                    officeTimer.innerHTML = '0.5s (MAX)';
                 }
                 localStorage.setItem('officeTime', prodStats.officeTime);
                 localStorage.setItem('officeSpeedUpgradeCost', prodStats.officeSpeedUpgradeCost);
@@ -807,8 +821,15 @@ function upgrade(e) {
                 localStorage.setItem('officeMultiplier', prodStats.officeMultiplier);
                 officeDouble.innerHTML = `Double Production: $${prodStats.officeDoubleUpgradeCost}`;
                 officeAmt.innerHTML = `Office Chair: ${prodStats.officeAmount} ($${prodStats.officeValue} (x${prodStats.officeMultiplier}))`
-                if (prodStats.officeMultiplier >= 4) {
+                if (prodStats.officeMultiplier >= 4 && prestigeBonus < 2) {
                     prodStats.officeMultiplier = 4;
+                    officeDouble.disabled = true;
+                    localStorage.setItem('officeDoubleDisabled', true);
+                    officeDouble.innerHTML = 'Double Production: MAX';
+                    break;
+                }
+                if (prodStats.officeMultiplier >= 16) {
+                    prodStats.officeMultiplier = 16;
                     officeDouble.disabled = true;
                     localStorage.setItem('officeDoubleDisabled', true);
                     officeDouble.innerHTML = 'Double Production: MAX';
@@ -829,12 +850,12 @@ function upgrade(e) {
                 leatherTimer.innerHTML = `${prodStats.leatherTime.toPrecision(4)}s`;
                 prodStats.leatherSpeedUpgradeCost = parseInt((prodStats.leatherSpeedUpgradeCost * 1.5).toPrecision(12));
                 leatherProdTime.innerHTML = `Reduce Time: $${prodStats.leatherSpeedUpgradeCost}`;
-                if (prodStats.leatherTime <= 1) {
-                    prodStats.leatherTime = 1;
+                if (prodStats.leatherTime <= 0.75) {
+                    prodStats.leatherTime = 0.75;
                     leatherProdTime.disabled = true;
                     localStorage.setItem('leatherProdTimeDisabled', true);
                     leatherProdTime.innerHTML = 'Reduce Time: MAX';
-                    leatherTimer.innerHTML = '1s (MAX)';
+                    leatherTimer.innerHTML = '0.75s (MAX)';
                 }
                 localStorage.setItem('leatherTime', prodStats.leatherTime);
                 localStorage.setItem('leatherSpeedUpgradeCost', prodStats.leatherSpeedUpgradeCost);
@@ -873,8 +894,15 @@ function upgrade(e) {
                 localStorage.setItem('leatherMultiplier', prodStats.leatherMultiplier);
                 leatherDouble.innerHTML = `Double Production: $${prodStats.leatherDoubleUpgradeCost}`;
                 leatherAmt.innerHTML = `Leather Chair: ${prodStats.leatherAmount} ($${prodStats.leatherValue} (x${prodStats.leatherMultiplier}))`
-                if (prodStats.leatherMultiplier >= 4) {
+                if (prodStats.leatherMultiplier >= 4 && prestigeBonus < 2) {
                     prodStats.leatherMultiplier = 4;
+                    leatherDouble.disabled = true;
+                    localStorage.setItem('leatherDoubleDisabled', true);
+                    leatherDouble.innerHTML = 'Double Production: MAX';
+                    break;
+                }
+                if (prodStats.leatherMultiplier >= 16) {
+                    prodStats.leatherMultiplier = 16;
                     leatherDouble.disabled = true;
                     localStorage.setItem('leatherDoubleDisabled', true);
                     leatherDouble.innerHTML = 'Double Production: MAX';
