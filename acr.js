@@ -481,6 +481,10 @@ function formatMoney() {
             totalDollarsArray = JSON.stringify(totalDollars).split('');
             money.innerHTML = `You have: $${totalDollarsArray[0] + '' + totalDollarsArray[1] + '' + totalDollarsArray[2]}.${totalDollarsArray[3] + '' + totalDollarsArray[4]}M`;
             break;
+        case totalDollars >= 1000000000 && totalDollars < 10000000000:
+            totalDollarsArray = JSON.stringify(totalDollars).split('');
+            money.innerHTML = `You have: $${totalDollarsArray[0]}.${totalDollarsArray[1] + '' + totalDollarsArray[2]}B`;
+            break;
         default:
             money.innerHTML = 'You have: $Too much :D'
     }
