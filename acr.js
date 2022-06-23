@@ -696,8 +696,15 @@ function upgrade(e) {
                     woodDouble.innerHTML = 'Double Production: MAX';
                     break;
                 }
-                if (prodStats.woodMultiplier >= 32) {
+                if (prodStats.woodMultiplier >= 32 && prestigeBonus < 35) {
                     prodStats.woodMultiplier = 32;
+                    woodDouble.disabled = true;
+                    localStorage.setItem('woodDoubleDisabled', true);
+                    woodDouble.innerHTML = 'Double Production: MAX';
+                    break;
+                }
+                if (prodStats.woodMultiplier >= 64) {
+                    prodStats.woodMultiplier = 64;
                     woodDouble.disabled = true;
                     localStorage.setItem('woodDoubleDisabled', true);
                     woodDouble.innerHTML = 'Double Production: MAX';
@@ -783,8 +790,15 @@ function upgrade(e) {
                     clothDouble.innerHTML = 'Double Production: MAX';
                     break;
                 }
-                if (prodStats.clothMultiplier >= 32) {
+                if (prodStats.clothMultiplier >= 32 && prestigeBonus < 35) {
                     prodStats.clothMultiplier = 32;
+                    clothDouble.disabled = true;
+                    localStorage.setItem('clothDoubleDisabled', true);
+                    clothDouble.innerHTML = 'Double Production: MAX';
+                    break;
+                }
+                if (prodStats.clothMultiplier >= 64) {
+                    prodStats.clothMultiplier = 64;
                     clothDouble.disabled = true;
                     localStorage.setItem('clothDoubleDisabled', true);
                     clothDouble.innerHTML = 'Double Production: MAX';
@@ -870,8 +884,15 @@ function upgrade(e) {
                     officeDouble.innerHTML = 'Double Production: MAX';
                     break;
                 }
-                if (prodStats.officeMultiplier >= 32 && prestigeBonus < 25) {
+                if (prodStats.officeMultiplier >= 32 && prestigeBonus < 35) {
                     prodStats.officeMultiplier = 32;
+                    officeDouble.disabled = true;
+                    localStorage.setItem('officeDoubleDisabled', true);
+                    officeDouble.innerHTML = 'Double Production: MAX';
+                    break;
+                }
+                if (prodStats.officeMultiplier >= 64) {
+                    prodStats.officeMultiplier = 64;
                     officeDouble.disabled = true;
                     localStorage.setItem('officeDoubleDisabled', true);
                     officeDouble.innerHTML = 'Double Production: MAX';
@@ -957,8 +978,15 @@ function upgrade(e) {
                     leatherDouble.innerHTML = 'Double Production: MAX';
                     break;
                 }
-                if (prodStats.leatherMultiplier >= 32 && prestigeBonus < 25) {
+                if (prodStats.leatherMultiplier >= 32 && prestigeBonus < 35) {
                     prodStats.leatherMultiplier = 32;
+                    leatherDouble.disabled = true;
+                    localStorage.setItem('leatherDoubleDisabled', true);
+                    leatherDouble.innerHTML = 'Double Production: MAX';
+                    break;
+                }
+                if (prodStats.leatherMultiplier >= 64) {
+                    prodStats.leatherMultiplier = 64;
                     leatherDouble.disabled = true;
                     localStorage.setItem('leatherDoubleDisabled', true);
                     leatherDouble.innerHTML = 'Double Production: MAX';
