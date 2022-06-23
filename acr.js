@@ -31,6 +31,13 @@ const leatherAuto = document.querySelector('.leather-automate');
 const leatherTimer = document.querySelector('.leather-prod-timer');
 const leatherUnlock = document.querySelector('.leather-unlock');
 const leatherDouble = document.querySelector('.leather-double');
+const reclinerProdButton = document.querySelector('.recliner-produce');
+const reclinerAmt = document.querySelector('.recliner');
+const reclinerProdTime = document.querySelector('.recliner-prod-time');
+const reclinerAuto = document.querySelector('.recliner-automate');
+const reclinerTimer = document.querySelector('.recliner-prod-timer');
+const reclinerUnlock = document.querySelector('.recliner-unlock');
+const reclinerDouble = document.querySelector('.recliner-double');
 const settingsModal = document.querySelector('.modal');
 const settingsButton = document.querySelector('.settings');
 const closeSettings = document.querySelector('.close');
@@ -88,6 +95,14 @@ const prodStats = {
     leatherDoubleUpgradeCost: 34102,
     leatherUnlock: 8309,
     leatherMultiplier: 1,
+    reclinerTime: 380,
+    reclinerValue: 592.79,
+    reclinerAmount: 0,
+    reclinerSpeedUpgradeCost: 3845,
+    reclinerAutoUpgradeCost: 44278,
+    reclinerDoubleUpgradeCost: 80233,
+    reclinerUnlock: 21010,
+    reclinerMultiplier: 1,
 }
 
 function init() {
@@ -152,6 +167,18 @@ function init() {
         case !localStorage.getItem('leatherDoubleDisabled'):
             localStorage.setItem('leatherDoubleDisabled', true);
             console.log('initializing-leatherDouble');
+        case !localStorage.getItem('reclinerProdButtonDisabled'):
+            localStorage.setItem('reclinerProdButtonDisabled', true);
+            console.log('initializing-reclinerProdButtonDisabled');
+        case !localStorage.getItem('reclinerProdTimeDisabled'):
+            localStorage.setItem('reclinerProdTimeDisabled', true);
+            console.log('initializing-reclinerProdTimeDisabled');
+        case !localStorage.getItem('reclinerAutoDisabled'):
+            localStorage.setItem('reclinerAutoDisabled', true);
+            console.log('initializing-reclinerAutoDisabled');
+        case !localStorage.getItem('reclinerDoubleDisabled'):
+            localStorage.setItem('reclinerDoubleDisabled', true);
+            console.log('initializing-reclinerDoubleDisabled');
         case !localStorage.getItem('clothUnlockStyleDisplay'):
             localStorage.setItem('clothUnlockStyleDisplay', 'block')
             console.log('initializing-clothUnlockStyleDisplay');
@@ -161,6 +188,9 @@ function init() {
         case !localStorage.getItem('leatherUnlockStyleDisplay'):
             localStorage.setItem('leatherUnlockStyleDisplay', 'block')
             console.log('initializing-leatherUnlockStyleDisplay');
+        case !localStorage.getItem('reclinerUnlockStyleDisplay'):
+            localStorage.setItem('reclinerUnlockStyleDisplay', 'block')
+            console.log('initializing-reclinerUnlockStyleDisplay');
         case !localStorage.getItem('woodTime'):
             localStorage.setItem('woodTime', 3.25);
             console.log('initializing-woodTime');
@@ -221,6 +251,21 @@ function init() {
         case !localStorage.getItem('leatherMultiplier'):
             localStorage.setItem('leatherMultiplier', 1);
             console.log('initializing-leatherMultiplier');
+        case !localStorage.getItem('reclinerTime'):
+            localStorage.setItem('reclinerTime', 380);
+            console.log('initializing-reclinerTime');
+        case !localStorage.getItem('reclinerAmount'):
+            localStorage.setItem('reclinerAmount', 0);
+            console.log('initializing-reclinerAmount');
+        case !localStorage.getItem('reclinerSpeedUpgradeCost'):
+            localStorage.setItem('reclinerSpeedUpgradeCost', 3845);
+            console.log('initializing-reclinerSpeedUpgradeCost');
+        case !localStorage.getItem('reclinerDoubleUpgradeCost'):
+            localStorage.setItem('reclinerDoubleUpgradeCost', 80233);
+            console.log('initializing-reclinerDoubleUpgradeCost');
+        case !localStorage.getItem('reclinerMultiplier'):
+            localStorage.setItem('reclinerMultiplier', 1);
+            console.log('initializing-reclinerMultiplier');
         case !localStorage.getItem('woodAutoIntervalBool'):
             localStorage.setItem('woodAutoIntervalBool', false);
             console.log('initializing-woodAutoIntervalBool');
@@ -233,6 +278,9 @@ function init() {
         case !localStorage.getItem('leatherAutoIntervalBool'):
             localStorage.setItem('leatherAutoIntervalBool', false);
             console.log('initializing-leatherAutoIntervalBool');
+        case !localStorage.getItem('reclinerAutoIntervalBool'):
+            localStorage.setItem('reclinerAutoIntervalBool', false);
+            console.log('initializing-reclinerAutoIntervalBool');
         case !localStorage.getItem('clothAmtOpacity'):
             localStorage.setItem('clothAmtOpacity', 0.5);
             console.log('initializing-clothAmtOpacity');
@@ -242,6 +290,9 @@ function init() {
         case !localStorage.getItem('leatherAmtOpacity'):
             localStorage.setItem('leatherAmtOpacity', 0.5);
             console.log('initializing-leatherAmtOpacity');
+        case !localStorage.getItem('reclinerAmtOpacity'):
+            localStorage.setItem('reclinerAmtOpacity', 0.5);
+            console.log('initializing-reclinerAmtOpacity');
         case !localStorage.getItem('rHBColor'):
             localStorage.setItem('rHBColor', 20);
             console.log('initializing-rHBColor');
@@ -293,9 +344,14 @@ function init() {
     leatherAuto.disabled = JSON.parse(localStorage.getItem('leatherAutoDisabled'));
     leatherProdTime.disabled = JSON.parse(localStorage.getItem('leatherProdTimeDisabled'));
     leatherDouble.disabled = JSON.parse(localStorage.getItem('leatherDoubleDisabled'));
+    reclinerProdButton.disabled = JSON.parse(localStorage.getItem('reclinerProdButtonDisabled'));
+    reclinerAuto.disabled = JSON.parse(localStorage.getItem('reclinerAutoDisabled'));
+    reclinerProdTime.disabled = JSON.parse(localStorage.getItem('reclinerProdTimeDisabled'));
+    reclinerDouble.disabled = JSON.parse(localStorage.getItem('reclinerDoubleDisabled'));
     clothUnlock.style.display = (localStorage.getItem('clothUnlockStyleDisplay'));
     officeUnlock.style.display = (localStorage.getItem('officeUnlockStyleDisplay'));
     leatherUnlock.style.display = (localStorage.getItem('leatherUnlockStyleDisplay'));
+    reclinerUnlock.style.display = (localStorage.getItem('reclinerUnlockStyleDisplay'));
     prodStats.woodTime = JSON.parse(localStorage.getItem('woodTime'));
     prodStats.woodAmount = JSON.parse(localStorage.getItem('woodAmount'));
     prodStats.woodSpeedUpgradeCost = JSON.parse(localStorage.getItem('woodSpeedUpgradeCost'));
@@ -316,9 +372,15 @@ function init() {
     prodStats.leatherSpeedUpgradeCost = JSON.parse(localStorage.getItem('leatherSpeedUpgradeCost'));
     prodStats.leatherDoubleUpgradeCost = JSON.parse(localStorage.getItem('leatherDoubleUpgradeCost'));
     prodStats.leatherMultiplier = JSON.parse(localStorage.getItem('leatherMultiplier'));
+    prodStats.reclinerTime = JSON.parse(localStorage.getItem('reclinerTime'));
+    prodStats.reclinerAmount = JSON.parse(localStorage.getItem('reclinerAmount'));
+    prodStats.reclinerSpeedUpgradeCost = JSON.parse(localStorage.getItem('reclinerSpeedUpgradeCost'));
+    prodStats.reclinerDoubleUpgradeCost = JSON.parse(localStorage.getItem('reclinerDoubleUpgradeCost'));
+    prodStats.reclinerMultiplier = JSON.parse(localStorage.getItem('reclinerMultiplier'));
     clothAmt.style.opacity = JSON.parse(localStorage.getItem('clothAmtOpacity'));
     officeAmt.style.opacity = JSON.parse(localStorage.getItem('officeAmtOpacity'));
     leatherAmt.style.opacity = JSON.parse(localStorage.getItem('leatherAmtOpacity'));
+    reclinerAmt.style.opacity = JSON.parse(localStorage.getItem('reclinerAmtOpacity'));
     rHBColor = JSON.parse(localStorage.getItem('rHBColor'));
     gHBColor = JSON.parse(localStorage.getItem('gHBColor'));
     bHBColor = JSON.parse(localStorage.getItem('bHBColor'));
@@ -393,12 +455,12 @@ function pageLoad() {
         officeDouble.innerHTML = `Double Production: MAX`;
     }
     leatherAmt.innerHTML = `Leather Chair: ${prodStats.leatherAmount} ($${prodStats.leatherValue} (x${prodStats.leatherMultiplier}))`;
-    if (prodStats.leatherTime > 1) {
+    if (prodStats.leatherTime > 0.75) {
         leatherProdTime.innerHTML = `Reduce Time: $${prodStats.leatherSpeedUpgradeCost}`;
     } else {
         leatherProdTime.innerHTML = `Reduce Time: MAX`;
     }
-    if (prodStats.leatherTime > 1) {
+    if (prodStats.leatherTime > 0.75) {
         leatherTimer.innerHTML = `${prodStats.leatherTime.toPrecision(4)}s`;
     } else {
         leatherTimer.innerHTML = `${prodStats.leatherTime}s (MAX)`;
@@ -407,6 +469,22 @@ function pageLoad() {
         leatherDouble.innerHTML = `Double Production: $${prodStats.leatherDoubleUpgradeCost}`;
     } else {
         leatherDouble.innerHTML = `Double Production: MAX`;
+    }
+    reclinerAmt.innerHTML = `Recliner: ${prodStats.reclinerAmount} ($${prodStats.reclinerValue} (x${prodStats.reclinerMultiplier}))`;
+    if (prodStats.reclinerTime > 1) {
+        reclinerProdTime.innerHTML = `Reduce Time: $${prodStats.reclinerSpeedUpgradeCost}`;
+    } else {
+        reclinerProdTime.innerHTML = `Reduce Time: MAX`;
+    }
+    if (prodStats.reclinerTime > 1) {
+        reclinerTimer.innerHTML = `${prodStats.reclinerTime.toPrecision(4)}s`;
+    } else {
+        reclinerTimer.innerHTML = `${prodStats.reclinerTime}s (MAX)`;
+    }
+    if (prodStats.reclinerMultiplier < 4) {
+        reclinerDouble.innerHTML = `Double Production: $${prodStats.reclinerDoubleUpgradeCost}`;
+    } else {
+        reclinerDouble.innerHTML = `Double Production: MAX`;
     }
     document.querySelector('.heading').style.backgroundColor = `rgb(${rHBColor}, ${gHBColor}, ${bHBColor})`;
     document.querySelector('.money').style.color = `rgb(${rHTColor}, ${gHTColor}, ${bHTColor})`;
@@ -420,6 +498,7 @@ let woodAutoIntervalBool = JSON.parse(localStorage.getItem('woodAutoIntervalBool
 let clothAutoIntervalBool = JSON.parse(localStorage.getItem('clothAutoIntervalBool'));
 let officeAutoIntervalBool = JSON.parse(localStorage.getItem('officeAutoIntervalBool'));
 let leatherAutoIntervalBool = JSON.parse(localStorage.getItem('leatherAutoIntervalBool'));
+let reclinerAutoIntervalBool = JSON.parse(localStorage.getItem('leatherAutoIntervalBool'));
 
 automateInit();
 function automateInit() {
@@ -442,6 +521,11 @@ function automateInit() {
         leatherAutoInterval = setInterval(leatherAutomate, prodStats.leatherTime * 1000);
     } else {
         leatherAutoInterval = null;
+    }
+    if (reclinerAutoIntervalBool === true) {
+        reclinerAutoInterval = setInterval(reclinerAutomate, prodStats.reclinerTime * 1000);
+    } else {
+        reclinerAutoInterval = null;
     }
 }
 
@@ -560,6 +644,21 @@ function produce(e) {
                 leatherProdButton.disabled = false;
             }, (prodStats.leatherTime) * 1000);
             break;
+        case 'recliner-produce':
+            reclinerProdButton.disabled = true;
+            setTimeout(() => {
+                prodStats.reclinerAmount += (1 * prodStats.reclinerMultiplier);
+                totalChairs += (1 * prodStats.reclinerMultiplier);
+                totalDollars += parseInt((prodStats.reclinerValue * prodStats.reclinerMultiplier * prestigeBonus).toFixed(2));
+                localStorage.setItem('reclinerAmount', prodStats.reclinerAmount);
+                localStorage.setItem('totalDollars', totalDollars);
+                localStorage.setItem('totalChairs', totalChairs);
+                formatMoney();
+                chairs.innerHTML = `You have produced: ${totalChairs} chairs`;
+                reclinerAmt.innerHTML = `Recliner: ${prodStats.reclinerAmount} ($${prodStats.reclinerValue} (x${prodStats.reclinerMultiplier}))`;
+                reclinerProdButton.disabled = false;
+            }, (prodStats.reclinerTime) * 1000);
+            break;
     }
     checkForPrestige();
 }
@@ -630,6 +729,21 @@ function leatherAutomate() {
     leatherAmt.innerHTML = `Leather Chair: ${prodStats.leatherAmount} ($${prodStats.leatherValue} (x${prodStats.leatherMultiplier}))`;
     checkForPrestige();
     leatherAutoInterval = setInterval(leatherAutomate, prodStats.leatherTime * 1000);
+}
+
+function reclinerAutomate() {
+    clearInterval(reclinerAutoInterval);
+    prodStats.reclinerAmount += (1 * prodStats.reclinerMultiplier);
+    totalChairs += (1 * prodStats.reclinerMultiplier);
+    totalDollars += parseInt((prodStats.reclinerValue * prodStats.reclinerMultiplier * prestigeBonus).toFixed(2));
+    localStorage.setItem('reclinerAmount', prodStats.reclinerAmount);
+    localStorage.setItem('totalDollars', totalDollars);
+    localStorage.setItem('totalChairs', totalChairs);
+    formatMoney();
+    chairs.innerHTML = `You have produced: ${totalChairs} chairs`;
+    reclinerAmt.innerHTML = `Recliner: ${prodStats.reclinerAmount} ($${prodStats.reclinerValue} (x${prodStats.reclinerMultiplier}))`;
+    checkForPrestige();
+    reclinerAutoInterval = setInterval(reclinerAutomate, prodStats.reclinerTime * 1000);
 }
 
 function upgrade(e) {
@@ -1066,6 +1180,114 @@ function upgrade(e) {
                 setTimeout(function () { renameValue.placeholder = '' }, 3000);
                 break;
             }
+        case 'recliner-prod-time':
+            if (totalDollars >= prodStats.reclinerSpeedUpgradeCost) {
+                totalDollars = (totalDollars - parseInt(prodStats.reclinerSpeedUpgradeCost).toPrecision(20));
+                localStorage.setItem('totalDollars', totalDollars);
+                formatMoney();
+                prodStats.reclinerTime /= 1.4;
+                reclinerTimer.innerHTML = `${prodStats.reclinerTime.toPrecision(4)}s`;
+                prodStats.reclinerSpeedUpgradeCost = parseInt((prodStats.reclinerSpeedUpgradeCost * 1.65).toPrecision(20));
+                reclinerProdTime.innerHTML = `Reduce Time: $${prodStats.reclinerSpeedUpgradeCost}`;
+                if (prodStats.reclinerTime <= 1) {
+                    prodStats.reclinerTime = 1;
+                    reclinerProdTime.disabled = true;
+                    reclinerProdTime.innerHTML = 'Reduce Time: MAX';
+                    reclinerTimer.innerHTML = '1s (MAX)';
+                    localStorage.setItem('reclinerProdTimeDisabled', true);
+                }
+                localStorage.setItem('reclinerTime', prodStats.reclinerTime);
+                localStorage.setItem('reclinerSpeedUpgradeCost', prodStats.reclinerSpeedUpgradeCost);
+                break;
+            } else {
+                renameValue.placeholder = 'NOT ENOUGH MONEY';
+                setTimeout(function () { renameValue.placeholder = '' }, 3000);
+                break;
+            }
+        case 'recliner-automate':
+            if (totalDollars >= prodStats.reclinerAutoUpgradeCost) {
+                totalDollars -= prodStats.reclinerAutoUpgradeCost;
+                localStorage.setItem('totalDollars', totalDollars);
+                formatMoney();
+                reclinerAuto.disabled = true;
+                reclinerProdButton.disabled = true;
+                reclinerAutoIntervalBool = true;
+                localStorage.setItem('reclinerAutoIntervalBool', true);
+                localStorage.setItem('reclinerAutoDisabled', true);
+                localStorage.setItem('reclinerProdButtonDisabled', true);
+                automateInit();
+                break;
+            } else {
+                renameValue.placeholder = 'NOT ENOUGH MONEY';
+                setTimeout(function () { renameValue.placeholder = '' }, 3000);
+                break;
+            }
+        case 'recliner-double':
+            if (totalDollars >= prodStats.reclinerDoubleUpgradeCost) {
+                totalDollars -= prodStats.reclinerDoubleUpgradeCost;
+                localStorage.setItem('totalDollars', totalDollars);
+                formatMoney();
+                prodStats.reclinerDoubleUpgradeCost *= 2;
+                prodStats.reclinerMultiplier *= 2;
+                localStorage.setItem('reclinerDoubleUpgradeCost', prodStats.reclinerDoubleUpgradeCost);
+                localStorage.setItem('reclinerMultiplier', prodStats.reclinerMultiplier);
+                reclinerDouble.innerHTML = `Double Production: $${prodStats.reclinerDoubleUpgradeCost}`;
+                reclinerAmt.innerHTML = `Recliner: ${prodStats.reclinerAmount} ($${prodStats.reclinerValue} (x${prodStats.reclinerMultiplier}))`
+                if (prodStats.reclinerMultiplier >= 4 && prestigeBonus < 2) {
+                    prodStats.reclinerMultiplier = 4;
+                    reclinerDouble.disabled = true;
+                    localStorage.setItem('reclinerDoubleDisabled', true);
+                    reclinerDouble.innerHTML = 'Double Production: MAX';
+                    break;
+                }
+                if (prodStats.reclinerMultiplier >= 8 && prestigeBonus < 5) {
+                    prodStats.reclinerMultiplier = 8;
+                    reclinerDouble.disabled = true;
+                    localStorage.setItem('reclinerDoubleDisabled', true);
+                    reclinerDouble.innerHTML = 'Double Production: MAX';
+                    break;
+                }
+                if (prodStats.reclinerMultiplier >= 16 && prestigeBonus < 10) {
+                    prodStats.reclinerMultiplier = 16;
+                    reclinerDouble.disabled = true;
+                    localStorage.setItem('reclinerDoubleDisabled', true);
+                    reclinerDouble.innerHTML = 'Double Production: MAX';
+                    break;
+                }
+                if (prodStats.reclinerMultiplier >= 32 && prestigeBonus < 50) {
+                    prodStats.reclinerMultiplier = 32;
+                    reclinerDouble.disabled = true;
+                    localStorage.setItem('reclinerDoubleDisabled', true);
+                    reclinerDouble.innerHTML = 'Double Production: MAX';
+                    break;
+                }
+                if (prodStats.reclinerMultiplier >= 64 && prestigeBonus < 100) {
+                    prodStats.reclinerMultiplier = 64;
+                    reclinerDouble.disabled = true;
+                    localStorage.setItem('reclinerDoubleDisabled', true);
+                    reclinerDouble.innerHTML = 'Double Production: MAX';
+                    break;
+                }
+                if (prodStats.reclinerMultiplier >= 128 && prestigeBonus < 350) {
+                    prodStats.reclinerMultiplier = 128;
+                    reclinerDouble.disabled = true;
+                    localStorage.setItem('reclinerDoubleDisabled', true);
+                    reclinerDouble.innerHTML = 'Double Production: MAX';
+                    break;
+                }
+                if (prodStats.reclinerMultiplier >= 256) {
+                    prodStats.reclinerMultiplier = 256;
+                    reclinerDouble.disabled = true;
+                    localStorage.setItem('reclinerDoubleDisabled', true);
+                    reclinerDouble.innerHTML = 'Double Production: MAX';
+                    break;
+                }
+                break;
+            } else {
+                renameValue.placeholder = 'NOT ENOUGH MONEY';
+                setTimeout(function () { renameValue.placeholder = '' }, 3000);
+                break;
+            }
     }
 }
 
@@ -1145,6 +1367,29 @@ function unlock(e) {
                 localStorage.setItem('leatherDoubleDisabled', false);
                 localStorage.setItem('leatherAmtOpacity', 1);
                 localStorage.setItem('leatherUnlockStyleDisplay', 'none');
+                break;
+            } else {
+                renameValue.placeholder = 'NOT ENOUGH MONEY';
+                setTimeout(function () { renameValue.placeholder = '' }, 3000);
+                break;
+            }
+        case 'recliner-prod-timer recliner-unlock':
+            if (totalDollars >= prodStats.reclinerUnlock) {
+                totalDollars -= prodStats.reclinerUnlock;
+                localStorage.setItem('totalDollars', totalDollars);
+                formatMoney();
+                reclinerProdButton.disabled = false;
+                reclinerAuto.disabled = false;
+                reclinerProdTime.disabled = false;
+                reclinerDouble.disabled = false;
+                reclinerAmt.style.opacity = 1;
+                reclinerUnlock.style.display = 'none';
+                localStorage.setItem('reclinerProdButtonDisabled', false);
+                localStorage.setItem('reclinerAutoDisabled', false);
+                localStorage.setItem('reclinerProdTimeDisabled', false);
+                localStorage.setItem('reclinerDoubleDisabled', false);
+                localStorage.setItem('reclinerAmtOpacity', 1);
+                localStorage.setItem('reclinerUnlockStyleDisplay', 'none');
                 break;
             } else {
                 renameValue.placeholder = 'NOT ENOUGH MONEY';
@@ -1271,3 +1516,8 @@ woodDouble.addEventListener('click', upgrade);
 clothDouble.addEventListener('click', upgrade);
 officeDouble.addEventListener('click', upgrade);
 leatherDouble.addEventListener('click', upgrade);
+reclinerProdTime.addEventListener('click', upgrade);
+reclinerAuto.addEventListener('click', upgrade);
+reclinerProdButton.addEventListener('click', produce);
+reclinerUnlock.addEventListener('click', unlock);
+reclinerDouble.addEventListener('click', upgrade);

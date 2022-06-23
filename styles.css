@@ -165,6 +165,12 @@ html {
     top: 40.5%;
 }
 
+.recliner-produce {
+    position: fixed;
+    left: 1%;
+    top: 48.9%;
+}
+
 .cloth {
     position: fixed;
     left: 5%;
@@ -185,6 +191,14 @@ html {
     position: fixed;
     left: 5%;
     top: 40.8%;
+    opacity: 0.5;
+    color: white;
+}
+
+.recliner {
+    position: fixed;
+    left: 5%;
+    top: 49.4%;
     opacity: 0.5;
     color: white;
 }
@@ -227,6 +241,12 @@ html {
     top: 40.5%;
 }
 
+.recliner-prod-timer {
+    position: fixed;
+    left: 25%;
+    top: 48.9%
+}
+
 .cloth-unlock,
 .cloth-prod-timer {
     color: rgb(0 0 0);
@@ -239,5 +259,10 @@ html {
 
 .leather-unlock,
 .leather-prod-timer {
+    color: rgb(0 0 0);
+}
+
+.recliner-unlock,
+.recliner-prod-timer {
     color: rgb(0 0 0);
 }
