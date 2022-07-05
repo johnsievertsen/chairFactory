@@ -112,6 +112,7 @@ function init() {
             console.log('initializing-prestigeBonus');
         case !localStorage.getItem('totalDollars'):
             localStorage.setItem('totalDollars', 0);
+            location.reload();
             console.log('initializing-totalDollars');
         case !localStorage.getItem('totalChairs'):
             localStorage.setItem('totalChairs', 0);
