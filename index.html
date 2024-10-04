@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="cssreset.css" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chair Factory</title>
+</head>
+
+<body>
+    <div class="heading">
+        <h1 class="factory-name">Your Chair Factory</h1>
+        <button type="button" class="rename">Rename Factory</button>
+        <input type="text" type="submit" class="name"></input>
+        <button type="button" class="settings">Settings</button>
+        <h5 class="money">You have: $0</h5>
+        <h5 class="chairs">You have produced: 0 chairs</h5>
+        <p class="upgrade-label">Upgrades:</p>
+        <p class="output"></p>
+    </div>
+    <div class="factory">
+        <div class="production">
+            <p class="wood-prod-timer">3.25s</p>
+            <p class="wood">Wooden Chair: 0 ($4.5)</p>
+            <button type="button" class="wood-produce">Produce</button>
+            <p class="cloth-prod-timer">10s</p>
+            <button type="button" class="cloth-prod-timer cloth-unlock">Unlock ($140)</button>
+            <p class="cloth">Cloth Chair: 0 ($24.9)</p>
+            <button type="button" class="cloth-produce">Produce</button>
+            <p class="office-prod-timer">60s</p>
+            <button type="button" class="office-prod-timer office-unlock">Unlock ($1625)</button>
+            <p class="office">Office Chair: 0 ($108.7)</p>
+            <button type="button" class="office-produce">Produce</button>
+            <p class="leather-prod-timer">180s</p>
+            <button type="button" class="leather-prod-timer leather-unlock">Unlock ($8309)</button>
+            <p class="leather">Leather Chair: 0 ($386)</p>
+            <button type="button" class="leather-produce">Produce</button>
+            <p class="recliner-prod-timer">380s</p>
+            <button type="button" class="recliner-prod-timer recliner-unlock">Unlock ($21010)</button>
+            <p class="recliner">Recliner: 0 ($592.79)</p>
+            <button type="button" class="recliner-produce">Produce</button>
+        </div>
+        <div class="upgrades">
+            <button type="button" class="wood-prod-time">Reduce Time: $50</button>
+            <button type="button" class="wood-automate">Automate Production: $1800</button>
+            <button type="button" class="wood-double">Double Production: $4400</button>
+            <p class="seperator">------------------------------------</p>
+            <button type="button" class="cloth-prod-time">Reduce Time: $250</button>
+            <button type="button" class="cloth-automate">Automate Production: $5500</button>
+            <button type="button" class="cloth-double">Double Production: $10296</button>
+            <p class="seperator">------------------------------------</p>
+            <button type="button" class="office-prod-time">Reduce Time: $742</button>
+            <button type="button" class="office-automate">Automate Production: $9375</button>
+            <button type="button" class="office-double">Double Production: $18050</button>
+            <p class="seperator">------------------------------------</p>
+            <button type="button" class="leather-prod-time">Reduce Time: $1502</button>
+            <button type="button" class="leather-automate">Automate Production: $17832</button>
+            <button type="button" class="leather-double">Double Production: $34102</button>
+            <p class="seperator">------------------------------------</p>
+            <button type="button" class="recliner-prod-time">Reduce Time: $3845</button>
+            <button type="button" class="recliner-automate">Automate Production: $44278</button>
+            <button type="button" class="recliner-double">Double Production: $80233</button>
+            <p class="seperator">------------------------------------</p>
+        </div>
+    </div>
+    <div class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p style="font-weight: bold;">Settings:</p>
+            <br>
+            <span>Header Background Color: </span>
+            <br>
+            <input type="range" class="slider" id="red-header-background-slider" min="0" max="255" value="">R</input>
+            <input type="range" class="slider" id="green-header-background-slider" min="0" max="255" value="">G</input>
+            <input type="range" class="slider" id="blue-header-background-slider" min="0" max="255" value="">B</input>
+            <br>
+            <br>
+            <span>Header Text Color:</span>
+            <br>
+            <input type="range" class="slider" id="red-header-text-slider" min="0" max="255" value="">R</input>
+            <input type="range" class="slider" id="green-header-text-slider" min="0" max="255" value="">G</input>
+            <input type="range" class="slider" id="blue-header-text-slider" min="0" max="255" value="">B</input>
+            <br>
+            <br>
+            <span>Factory Background Color: </span>
+            <br>
+            <input type="range" class="slider" id="red-factory-background-slider" min="0" max="255" value="">R</input>
+            <input type="range" class="slider" id="green-factory-background-slider" min="0" max="255" value="">G</input>
+            <input type="range" class="slider" id="blue-factory-background-slider" min="0" max="255" value="">B</input>
+            <br>
+            <p>------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+            </p>
+            <br>
+            <button type="button" class="prestige">Prestige</button>
+            <span>**This Will Reset all progress! (Must produce 50,000 chairs to unlock)</span>
+        </div>
+    </div>
+    <div class="prestige-warning">
+        <div class="prestige-content">
+            <p>All progress will be reset in exchange for a calculated % increase in profit. The more chairs you have
+                produced, the greater the bonus. Are you sure you want to
+                prestige?</p>
+            <button type="button" class="confirm">Yes</button>
+            <button type="button" class="deny">No</button>
+        </div>
+    </div>
+    <script type="text/javascript" src="acr.js"></script>
+</body>
+
+</html>
